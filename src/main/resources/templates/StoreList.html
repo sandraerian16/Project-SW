@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Title</title>
+</head>
+
+<body>
+
+<table>
+    <th>Store name </th>
+    <th>type </th>
+    <th>Owner name </th>
+    <tr th:each="st : ${st}">
+
+        <td th:text="${st.getStore_name()}"></td>
+        <td th:text="${st.getType()}"></td>
+        <td th:text="${st.getOwner()}"></td>
+
+    </tr>
+</table>
+<form action="#" th:action="@{/approve}"   method="get">
+    <input type="submit" value="Approve"/>
+
+</form>
+</body>
+</html>

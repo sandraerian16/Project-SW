@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Title</title>
+</head>
+
+<body>
+
+<table>
+    <th>Product name </th>
+    <th>Product view no </th>
+    <th>product buy no </th>
+
+    <tr th:each="h : ${sf}">
+        <td th:text="${h.getName()}"></td>
+        <td th:text="${h.getNum_view()}"></td>
+        <td th:text="${h.getNum_buy()}"></td>
+    </tr>
+</table>
+</body>
+</html>

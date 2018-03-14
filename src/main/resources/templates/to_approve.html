@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/approve}" th:object="${f}"   method="post">
+    <p>name of the approved store: <input type="text" th:field="*{store_name}" /> </p>
+    <input type="submit" value="Approve"/>
+
+</form>
+</body>
+</html>
