@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Title</title>
+</head>
+
+<body>
+
+<table>
+    <tr>
+        <th>Entity Concerned</th>
+        <th>Function</th>
+        <th>Value</th>
+    </tr>
+    <tr th:each="st : ${s}">
+
+        <td th:text="${st.getEntity()}"></td>
+        <td th:text="${st.getFunction()}"></td>
+        <td th:text="${st.getValue()}"></td>
+
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/AddStat}"  th:object="${stat}" method="post">
+    <select th:field="*{entity}">
+        <option value="Products">Products Statistics </option>
+        <option value="Brands">Brand Statistics</option>
+    </select>
+    <p><input type="submit" value="Submit" />
+</form>
+
+
+
+</body>
+</html>
