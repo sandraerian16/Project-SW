@@ -1,79 +1,45 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Controllers.Entity.User;
-import com.example.demo.Controllers.reprositery.UserReprository;
+import com.example.demo.Entity.User;
+import com.example.demo.Repository.UserReprository;
+import com.example.demo.Service.User_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
+@SessionAttributes("User")
 @Controller
 public class UserController {
+
     @Autowired
-    private UserReprository rep;
+    private User_Service service;
+
 
     @GetMapping("/Register")
-    public String index(Model model) {
+    public String Register(Model model) {
         model.addAttribute("sub", new User());
         return "register";
     }
 
     @PostMapping("/Register")
-    public String submit(Model model, @ModelAttribute User sub) {
-        model.addAttribute("sub", new User());
-
-        if (sub.getEmail().equals("") || sub.getPassword().equals("") || sub.getUser_name().equals("")) {
-            return "register";
-        }
-       /* else if (rep.findById(sub.getUser_name())!=null){
-            return "register";
-        }*/
-        else if (rep.existsById(sub.getUser_name())) {
-            return "register";
-        }
-
-        rep.save(sub);
-        return "register";
+    public String Register_info(Model model, @ModelAttribute User sub) {
+       return service.Register(model, sub);
     }
 
-
     @GetMapping("/login")
-    public String index1(Model model) {
+    public String Login(Model model) {
         model.addAttribute("sub", new User());
         return "login";
     }
 
     @PostMapping("/login")
-    public String submit1(Model model, @ModelAttribute User sub) {
-        model.addAttribute("sub", new User());
+    public String Login_Info(Model model, @ModelAttribute User sub,HttpServletRequest request,HttpServletResponse response) {
 
-        if (sub.getPassword().equals("") || sub.getUser_name().equals("")) {
-            return "login";
-        }
-    /*    else if (rep.findById(sub.getUser_name())!=null){
-            return "register";
-        }*/
-        else {
-            Optional<User> optionalUser = rep.findById(sub.getUser_name());
-            if (optionalUser.isPresent()) {
-                User user = optionalUser.get();
-                if (user.getPassword().equals(sub.getPassword())) {
-                    if (user.getType().equals("Administrator")) {
-                        return "admin_face";
-                    }
-                    else if (user.getType().equals("StoreOwner")){
-                        return "storeOwner_page";
-                    }
-                    else if (user.getType().equals("NormalUser")){
-                        return"NormalUserPage";
-                    }
-                }
-            } else {
-                return "login";
-            }
-        }
-        return "register";
+        return service.Login(model, sub,  request,  response);
     }
 }

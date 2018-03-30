@@ -1,4 +1,4 @@
-package com.example.demo.Controllers.Entity;
+package com.example.demo.Entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

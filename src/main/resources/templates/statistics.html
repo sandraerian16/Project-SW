@@ -2,16 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="refresh" content="60">
+
     <title>Title</title>
 </head>
-
+<style>table, th, td {
+    border: 1px solid black;
+}</style>
 <body>
 
 <table>
-    <th>Product name </th>
-    <th>Product view no </th>
-    <th>product buy no </th>
-
+    <tr>
+        <th>Product name</th>
+        <th>Product view no</th>
+        <th>product buy no</th>
+    </tr>
     <tr th:each="h : ${sf}">
         <td th:text="${h.getName()}"></td>
         <td th:text="${h.getNum_view()}"></td>

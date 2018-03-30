@@ -1,33 +1,31 @@
 package com.example.demo.Controllers;
-import com.example.demo.Controllers.Entity.Brand;
-import com.example.demo.Controllers.reprositery.Brand_Repository;
+import com.example.demo.Entity.Brand;
+import com.example.demo.Repository.Brand_Repository;
+import com.example.demo.Service.Brand_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import com.example.demo.Service.Brand_Service;
 
 @Controller
 public class BrandController {
+
     @Autowired
-    private Brand_Repository B_R;
+    Brand_Service service;
 
     @GetMapping("/AddBrand")
-    public String index(Model model) {
+    public String Addbrand(Model model) {
         model.addAttribute("pro", new Brand());
         return "Add_Brand";
     }
 
     @PostMapping("/AddBrand")
-    public String submit(Model model, @ModelAttribute Brand pro) {
-        model.addAttribute("pro", new Brand());
-        if (B_R.existsById(pro.getName())) {
-            return "Add_Brand";
-        }
+    public String AddBrand_info(Model model, @ModelAttribute Brand pro) {
+        return service.AddBrand(model, pro);
 
-        B_R.save(pro);
-        return "Add_Brand";
     }
 
 }
+
