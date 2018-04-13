@@ -85,6 +85,6 @@ public class Product {
     }
 
     public void setQuntity(int quntity) {
-        quntity = quntity;
+        this.quntity = quntity;
     }
 }

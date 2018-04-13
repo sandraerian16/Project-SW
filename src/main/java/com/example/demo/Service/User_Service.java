@@ -57,6 +57,7 @@ public class User_Service {
 
                     session.setAttribute("username",user.getUser_name());
                     session.setAttribute("Address",user.getAddress());
+                    session.setAttribute("type",user.getType());
                     System.out.println(session.getId());
 
 
@@ -79,5 +80,6 @@ public class User_Service {
         }
         return "register";
     }
+
 
 }

@@ -7,13 +7,22 @@
 
 <body>
 <form action="#" th:action="@{/Addstore1}" method="get">
-    <input  type="submit" value="Add Store"  /></p>
+  <p>  <input  type="submit" value="Add Store"  /></p>
 </form>
 <form action="#" th:action="@{/AddProducttostore}" method="get">
-    <input  type="submit" value="ADD product to store"  /></p>
+   <p> <input  type="submit" value="ADD product to store"  /></p>
 </form>
+
+<form action="#" th:action="@{/searchproduct}" method="get">
+    <p><input type="submit" value="search for product"/> </p>
+</form>
+
 <form action="#" th:action="@{/viewstatistics}" method="get">
-    <input  type="submit" value="view statistics"  /></p>
+    <p><input  type="submit" value="view statistics"  /></p>
+</form>
+
+<form action="#" th:action="@{/showbalance}" method="get">
+    <p><input  type="submit" value="view Balance"  /></p>
 </form>
 </body>
 </html>

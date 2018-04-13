@@ -10,6 +10,7 @@ public class Platform {
     String Product_brand;
     int price_start;
     String product_category;
+    int price_end;
 
     public int getPrice_end() {
         return price_end;
@@ -27,7 +28,6 @@ public class Platform {
         this.price_end = price_end;
     }
 
-    int price_end;
 
     public Platform(String product_name, String product_brand, int product_price, String product_category,int Price_end) {
         Product_name = product_name;

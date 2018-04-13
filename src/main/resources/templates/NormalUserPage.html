@@ -4,15 +4,21 @@
     <title>Getting Started: Handling Form Submission</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
+
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Title</title>
 </head>
 <body>
+
 <form action="#" th:action="@{/searchproduct}" method="get">
-    <input type="submit" value="search product"/>
+    <input type="submit" value="search for product"/>
+</form>
+
+<form action="#" th:action="@{/showbalance}" method="get">
+    <p><input  type="submit" value="view Balance" /></p>
 </form>
 </body>
+
 </html>

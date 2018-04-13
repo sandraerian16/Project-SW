@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.print.DocFlavor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @SessionAttributes("User")
@@ -18,6 +21,7 @@ public class UserController {
 
     @Autowired
     private User_Service service;
+    @Autowired UserReprository use;
 
 
     @GetMapping("/Register")
@@ -41,5 +45,21 @@ public class UserController {
     public String Login_Info(Model model, @ModelAttribute User sub,HttpServletRequest request,HttpServletResponse response) {
 
         return service.Login(model, sub,  request,  response);
+    }
+    @GetMapping("/showbalance")
+    public ModelAndView show_balance(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        Optional<User> user = use.findById((String) session.getAttribute("username"));
+        User user1 = new User();
+        ModelAndView mv = new ModelAndView();
+
+        if(user.isPresent()){user1=user.get();
+            mv.addObject("balance", user1.getbalance());
+        }
+        mv.setViewName("ViewBalance");
+        return mv;
+
+
     }
 }

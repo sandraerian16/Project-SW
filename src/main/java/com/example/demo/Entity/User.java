@@ -14,16 +14,19 @@ public class User {
     String bankaccount;
     String address;
     String type;
+    double balance;
+    int  bought;
 
 
-
-    public User(String user_name, String password, String email, String Bank_account,  String Address,  String type) {
+    public User(String user_name, String password, String email, String Bank_account,  String Address,  String type ,double balance) {
         this.user_name = user_name;
         this.password = password;
         this.email = email;
-        bankaccount = Bank_account;
-        address = address;
+        this.bankaccount = Bank_account;
+        this.address = Address;
         this.type = type;
+        this.balance=balance;
+        this.bought=0;
     }
 
     public User() {
@@ -58,7 +61,7 @@ public class User {
     }
 
     public void setBank_account(String Bank_account) {
-        bankaccount = Bank_account;
+        this.bankaccount = Bank_account;
     }
 
 
@@ -67,7 +70,7 @@ public class User {
     }
 
     public void setAddress(String Address) {
-        address = Address;
+        this.address = Address;
     }
 
     public String getType() {
@@ -76,5 +79,29 @@ public class User {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getBankaccount() {
+        return bankaccount;
+    }
+
+    public void setBankaccount(String bankaccount) {
+        this.bankaccount = bankaccount;
+    }
+
+    public double getbalance() {
+        return balance;
+    }
+
+    public void setbalance(double balance) {
+        this.balance = balance;
+    }
+
+    public int getBought() {
+        return bought;
+    }
+
+    public void setBought(int bought) {
+        this.bought= bought;
     }
 }
