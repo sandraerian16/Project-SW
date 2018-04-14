@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Title</title>
+</head>
+<style>table, th, td {
+    border: 1px solid blue;
+}</style>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>type</th>
+        <th>Product name</th>
+    </tr>
+    <tr th:each="t : ${st}">
+        <td th:text="${t.getType()}"></td>
+        <td th:text="${t.getProductName()}"></td>
+
+
+
+    </tr>
+</table>
+
+<form action="#" th:action="@{/Undo}" method="get">
+    <P><input type="submit" value="UNDO"/></P>
+
+</form>
+</body>
+</html>
