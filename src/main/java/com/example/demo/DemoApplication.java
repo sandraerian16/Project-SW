@@ -19,30 +19,32 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
+
 	@Bean
-	CommandLineRunner runner(UserReprository user, StoreReprository store, PlatformRepritory platform, ProductReprository product) {
+	CommandLineRunner runner(UserReprository user, StoreReprository store, PlatformRepritory platform,ProductReprository product){
 		return args -> {
-			user.save(new User("sandra", "123"
-					, "sandra", "sadndra"
-					, "sa", "Administrator", 0));
-			user.save(new User("jan", "1234"
-					, "jan", "sad", "maadi"
-					, "StoreOwner", 1000));
+			user.save(new User("sandra","123"
+					,"sandra","sadndra"
+					,"sa","Administrator",0));
+			user.save(new User("jan","1234"
+					,"jan","sad","maadi"
+					,"StoreOwner",1000));
 
-			user.save(new User("elain", "12345"
-					, "elain", "sads", "maadi"
-					, "NormalUser", 1500));
+			user.save(new User("elain","12345"
+					,"elain","sads","maadi"
+					,"NormalUser",1500));
 
-			Store s = new Store("store1", "fs", "dasd", "dfs", "", "jan");
+			Store s = new Store("store1","fs","dasd","dfs","","jan");
 			s.setApproved(true);
 			store.save(s);
-			platform.save(new Platform("p1", "f", 2, "h", 10));
-			platform.save(new Platform("p2", "f", 1, "h", 15));
+			platform.save(new Platform("p1","f",2,"h",10));
+			platform.save(new Platform("p2","f",1,"h",15));
 
-			product.save(new Product("p1", "store1", "hj", 5, 2, 0, 0));
-			platform.save(new Platform("p5", "brada", 50, "bag", 120));
-			product.save(new Product("p5", "store1", "bag", 10, 100, 0, 0));
+			product.save(new Product("p1","store1","hj",5,2,0,0));
+			platform.save(new Platform("p5","brada",50,"bag",120));
+			product.save(new Product("p5","store1","bag",10,100,0,0));
 		};
 	}
+
 
 }
