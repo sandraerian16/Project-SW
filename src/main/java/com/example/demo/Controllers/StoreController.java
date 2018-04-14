@@ -1,5 +1,7 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.Entity.Actions;
+import com.example.demo.Entity.Product;
 import com.example.demo.Entity.Store;
 import com.example.demo.Repository.StoreReprository;
 import com.example.demo.Service.Store_Service;
@@ -21,6 +23,7 @@ public class StoreController {
     Store_Service service;
     @Autowired
     private StoreReprository store_RB;
+
 
     @GetMapping("/Addstore1")
     public String AddStore(Model model) {
@@ -63,6 +66,8 @@ public class StoreController {
        return  service.Check_Approve(model, store);
 
     }
+
+
 
 
 

@@ -7,7 +7,7 @@
 <body>
 <form action="#" th:action="@{/Buy}" th:object="${struct}"   method="post">
     <p>name of product: <input type="text" th:field="*{name}" /> </p>
-    <p>number <input type="text" th:field="*{num}"/></p>
+    <p>quantity <input type="text" th:field="*{num}"/></p>
     <p>Shipping Address <input type="text" th:field="*{address}"/></p>
     <p><input type="checkbox" name="agreement" value="agree" th:field="*{agree}"> agree on the agreement <br></p>
     <input type="submit" value="BUY"/>

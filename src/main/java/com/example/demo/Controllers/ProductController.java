@@ -36,6 +36,28 @@ public class ProductController {
         return  service.AddProduct_ToStore(model, prod);
     }
 
+    @GetMapping("/editProductStore")
+    public String EditProduct_ToStore(Model model) {
+        model.addAttribute("prod1", new Product());
+        return "storeEditProduct";
+    }
+
+    @PostMapping("/editProductStore")
+    public String EditProduct_ToStore_info(Model model, @ModelAttribute Product prod1) {
+        return  service.EditProduct_ToStore(model, prod1);
+    }
+
+    @GetMapping("/deleteProductStore")
+    public String DeleteProduct_ToStore(Model model) {
+        model.addAttribute("prod2", new Product());
+        return "storeDeleteProduct";
+    }
+
+    @PostMapping("/deleteProductStore")
+    public String DeleteProduct_ToStore_info(Model model, @ModelAttribute Product prod2) {
+        return  service.DeleteProduct_ToStore(model, prod2);
+    }
+
     @GetMapping("/searchproduct")
     public ModelAndView SearchProduct(Model model ) {
         ArrayList<Product> st = new ArrayList<>();
