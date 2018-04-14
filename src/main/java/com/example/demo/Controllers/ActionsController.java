@@ -4,6 +4,7 @@ import com.example.demo.Entity.Product;
 import com.example.demo.Entity.Store;
 import com.example.demo.Entity.User;
 import com.example.demo.Repository.ActionsRepository;
+import com.example.demo.Repository.ProductReprository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class ActionsController {
     @Autowired
     private ActionsRepository Actions_RB;
+    @Autowired
+    private ProductReprository product_RB;
     String namee;
 
     @GetMapping("/viewActionsST")
@@ -46,25 +50,7 @@ public class ActionsController {
         return mv;
     }
 
-    /*@GetMapping("/viewActions")
-    public ModelAndView SearchProduct(Model model , HttpServletRequest request ) {
-        ArrayList<Actions> st = new ArrayList<>();
-        Iterable<Actions> s = Actions_RB.findAll();
-        ModelAndView mv = null;
-        HttpSession session = request.getSession();
-        String namenow = (String) session.getAttribute("storeName");
-        System.out.println("fdgdfs : " + namenow);
-        for(Actions t : s)
-        {
-            if(t.getStoreID().equals("store1")){st.add(t);}
-           // st.add(t);
-        }
-            mv = new ModelAndView();
-        mv.addObject("st", st);
-        mv.setViewName("viewActions");
-        return mv;
-    }
-*/
+
 
 
 }

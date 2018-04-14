@@ -43,10 +43,8 @@ public class Product_Service {
             Platform temp_plat = optionalProduct.get();
             if (store.existsById(prod.getStore_ID()) && temp_plat.getPrice_start() <= prod.getPrice() && temp_plat.getPrice_end() >= prod.getPrice()) {
                 Product_RB.save(prod);
-                Actions A1 = new Actions();
-                A1.setProductName(prod.getName());
-                A1.setStoreID(prod.getStore_ID());
-                A1.setType("ADD");
+                Actions A1 = new Actions("ADD",prod.getName(),prod.getStore_ID(),prod.getProduct_type(),prod.getQuntity(),prod.getPrice());
+
                 Actions_RB.save(A1);
                 return "storeOwner_page";
             }
@@ -73,15 +71,16 @@ public class Product_Service {
             Product temp_prod = optionalProduct1.get();
 
             if ( temp_plat.getPrice_start() <= prod1.getPrice() && temp_plat.getPrice_end() >= prod1.getPrice()) {
+
+
+                Actions A1 = new Actions("EDIT",temp_prod.getName(),temp_prod.getStore_ID(),temp_prod.getProduct_type(),temp_prod.getQuntity(),temp_prod.getPrice());
+
                 prod1.setNum_buy(temp_prod.getNum_buy());
                 prod1.setNum_view(temp_prod.getNum_view());
                 prod1.setStore_ID(temp_prod.getStore_ID());
                 Product_RB.deleteById(prod1.getName());
                 Product_RB.save(prod1);
-                Actions A1 = new Actions();
-                A1.setProductName(prod1.getName());
-                A1.setStoreID(prod1.getStore_ID());
-                A1.setType("EDIT");
+
                 Actions_RB.save(A1);
                 return "storeOwner_page";
             }
@@ -102,12 +101,9 @@ public class Product_Service {
         if (optionalProduct1.isPresent()) {
 
             Product temp_prod = optionalProduct1.get();
-
             if (Product_RB.existsById(prod2.getName())) {
-                Actions A1 = new Actions();
-                A1.setProductName(prod2.getName());
-                A1.setStoreID(temp_prod.getStore_ID());
-                A1.setType("DELETE");
+
+                Actions A1 = new Actions("DELETE",temp_prod.getName(),temp_prod.getStore_ID(),temp_prod.getProduct_type(),temp_prod.getQuntity(),temp_prod.getPrice());
                 Actions_RB.save(A1);
                 Product_RB.deleteById(prod2.getName());
 
@@ -192,6 +188,43 @@ public class Product_Service {
             }
         }
         return sf;
+    }
+
+
+    public String UndoAction2(Model model,@ModelAttribute Actions Action) {
+        model.addAttribute("Action", new Actions());
+        Optional< Actions> actionOP = Actions_RB.findById(Action.getID());
+        if(actionOP.isPresent())
+        {
+            Actions action = actionOP.get();
+            if(action.getType().equals("ADD"))
+            {
+                String productname = action.getProductName();
+                Product_RB.deleteById(productname);
+                Actions_RB.deleteById(Action.getID());
+
+            }
+            else if (action.getType().equals("DELETE"))
+            {
+
+                Product product = new Product(action.getProductName(),action.getStoreID(),action.getProduct_type()
+                        ,action.getProduct_quntity(),action.getProduct_price(),0,0);
+                Product_RB.save(product);
+                Actions_RB.deleteById(Action.getID());
+
+            }
+            else if (action.getType().equals("EDIT"))
+            {
+                String productname=action.getProductName();
+                Product_RB.deleteById(productname);
+                Product product = new Product(action.getProductName(),action.getStoreID(),action.getProduct_type()
+                        ,action.getProduct_quntity(),action.getProduct_price(),0,0);
+                Product_RB.save(product);
+                Actions_RB.deleteById(Action.getID());
+            }
+        }
+
+        return "storeOwner_page";
     }
 
 

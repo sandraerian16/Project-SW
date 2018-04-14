@@ -42,7 +42,7 @@ public class DemoApplication {
 
 			product.save(new Product("p1","store1","hj",5,2,0,0));
 			platform.save(new Platform("p5","brada",50,"bag",120));
-			product.save(new Product("p5","store1","bag",10,100,0,0));
+		//	product.save(new Product("p5","store1","bag",10,100,0,0));
 		};
 	}
 

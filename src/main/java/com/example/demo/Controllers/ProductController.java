@@ -1,5 +1,6 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.Entity.Actions;
 import com.example.demo.Service.*;
 import com.example.demo.Entity.Product;
 import com.example.demo.Repository.ProductReprository;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class ProductController {
@@ -96,5 +98,17 @@ public class ProductController {
     public String Buy_Product_info(Model model,@ModelAttribute temp temp, HttpServletRequest request) {
 
        return service.Buy_Product(model, temp,request);
+    }
+    @GetMapping("/Undo")
+    public String UndoAction(Model model) {
+        model.addAttribute("Action", new Actions());
+        return "UndoAction";
+    }
+
+    @PostMapping("/Undo")
+    public String UndoAction2(Model model,@ModelAttribute Actions Action) {
+        return service.UndoAction2(model, Action);
+
+
     }
 }

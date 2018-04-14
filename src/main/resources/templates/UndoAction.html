@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Undo Action</title>
+</head>
+<body>
+<form action="#" th:action="@{/Undo}" th:object="${Action}"   method="post">
+
+    <p style="font-size: 20px">id of the action you want to undo <input th:type="text" th:field="*{ID}"> </p>
+
+    <input style="font-size: 20px" type="submit" value="Undo Action"/>
+
+</form>
+
+</body>
+</html>

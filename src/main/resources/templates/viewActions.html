@@ -16,6 +16,7 @@
         <th>Product name</th>
     </tr>
     <tr th:each="t : ${st}">
+        <td th:text="${t.getID()}"></td>
         <td th:text="${t.getType()}"></td>
         <td th:text="${t.getProductName()}"></td>
 
