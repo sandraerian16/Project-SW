@@ -1,8 +1,8 @@
 package com.example.demo.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 @Entity
 public class Store {
@@ -15,6 +15,18 @@ public class Store {
     Boolean approved;
 
     String Owner;
+    String Collab;
+
+    public String getCollab() {
+        return Collab;
+    }
+
+    public void setCollab(String collab) {
+        Collab = collab;
+    }
+
+    //ArrayList<Collaborators_Class> Collaborator= new ArrayList<>();
+
 
     public Store() {
         approved = false;
@@ -85,5 +97,37 @@ public class Store {
 
     public void setApproved(Boolean approved) {
         this.approved = approved;
+    }
+    /*public void setCollaborator(ArrayList<Collaborators_Class> collaborator) {
+        Collaborator = collaborator;
+    }
+
+    public ArrayList<Collaborators_Class> getCollaborator()
+    {
+        return Collaborator;
+    }
+
+    public void AddCols(Collaborators_Class C)
+    {
+        Collaborator.add(C);
+    }*/
+    ArrayList<String> Collaborators= new ArrayList<>();
+
+    public ArrayList<String> getCollaborators() {
+        return Collaborators;
+    }
+
+    public void setCollaborators(ArrayList<String> collaborators) {
+        Collaborators = collaborators;
+    }
+
+
+    public void Add_COLL_STRING(String C)
+    {
+        Collaborators.add(C);
+        setCollaborators(Collaborators);
+        /*Collaborators_Class d= new Collaborators_Class();
+        d.setName(C);
+        Collaborator.add(d);*/
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import com.example.demo.Service.Actions_Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,8 @@ public class ActionsController {
     private ActionsRepository Actions_RB;
     @Autowired
     private ProductReprository product_RB;
-    String namee;
+    @Autowired
+    Actions_Service service;
 
     @GetMapping("/viewActionsST")
     public java.lang.String DeleteProduct_ToStore(Model model) {
@@ -34,20 +36,8 @@ public class ActionsController {
     }
     @PostMapping("/viewActionsST")
     public ModelAndView SearchProduct(Model model , @ModelAttribute Store storeName ) {
-        ArrayList<Actions> st = new ArrayList<>();
-        Iterable<Actions> s = Actions_RB.findAll();
-        ModelAndView mv = null;
+        return service.storeActions(model, storeName);
 
-        System.out.println("fdgdfs : " + storeName.getStore_name());
-        for(Actions t : s)
-        {
-            if(t.getStoreID().equals(storeName.getStore_name())){st.add(t);}
-            // st.add(t);
-        }
-         mv = new ModelAndView();
-        mv.addObject("st", st);
-        mv.setViewName("viewActions");
-        return mv;
     }
 
 
