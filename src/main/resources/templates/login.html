@@ -3,16 +3,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Handling Form Submission</title>
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 
 
 <form action="#" th:action="@{/login}" th:object="${sub}" method="post">
-    <p>Username : <input type="text" th:field="*{user_name}" /></p>
-    <p>Password: <input type="password" th:field="*{password}" /></p>
+    <p>Username <br/> <input type="text" th:field="*{user_name}" placeholder="your name.."/></p>
+    <p>Password<br/> <input type="password" th:field="*{password}" placeholder="enter password.."/></p>
 
-    <p><input type="submit" value="Submit" />
+    <p><input type="submit" value="LOGIN" />
 </form>
 </body>
 </html>

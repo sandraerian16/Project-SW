@@ -3,27 +3,20 @@
 <head>
     <title>Getting Started: Handling Form Submission</title>
     <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Title</title>
-</head>
 <body>
 
-<form action="#" th:action="@{/searchproduct}" method="get">
-    <input type="submit" value="search for product"/>
+<form action="#" th:action="@{/AddProducttostore}" method="get">
+    <input  type="submit" value="ADD product to store"  /></p>
 </form>
-
-<form action="#" th:action="@{/showbalance}" method="get">
-    <p><input  type="submit" value="view Balance" /></p>
+<form action="#" th:action="@{/viewstatistics}" method="get">
+    <input  type="submit" value="view statistics"  /></p>
 </form>
-
 <form action="#" th:action="@{/logout}" method="get">
     <input  type="submit" value="Logout :( "  /></p>
 </form>
 </body>
-
 </html>

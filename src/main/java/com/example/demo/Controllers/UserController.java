@@ -59,7 +59,35 @@ public class UserController {
         }
         mv.setViewName("ViewBalance");
         return mv;
-
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,Model model)
+    {
+        service.logout(request);
+        return Login(model);
+    }
+    @GetMapping("/Back")
+    public String Back(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        String type=(String)session.getAttribute("type");
+        if(type.equals("Administrator"))
+        {
+            return "admin_face";
+        }
+        else if(type.equals("StoreOwner"))
+        {
+            return "storeOwner_page";
+        }
+        else if(type.equals("Collaborators"))
+        {
+            return "collaborators_Page";
+        }
+        else if(type.equals("NormalUser"))
+        {
+            return "NormalUserPage";
+        }
+        return "login";
 
     }
 }

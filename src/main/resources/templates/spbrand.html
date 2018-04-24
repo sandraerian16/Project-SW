@@ -2,15 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
     <title>Title</title>
 </head>
 <body>
 <form action="#" th:action="@{/specificBrand}"  th:object="${stat}" method="post">
-<p> the name of the Brand <input type="text" th:field="*{entity}"/></p>
+<p> the name of the Brand <br/><input type="text" th:field="*{entity}"/></p>
 <p><input type="submit" value="Submit" />
     </form>
 
 
-
+<form action="#" th:action="@{/Back}" method="get">
+    <input  type="submit" value="return to menu"  /></p>
+</form>
 </body>
 </html>
