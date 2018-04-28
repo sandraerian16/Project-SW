@@ -12,19 +12,21 @@ import org.mockito.MockitoAnnotations;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.mockito.Mockito;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class BrandTest {
 
-    @Mock
-    private Brand brand;
+
     @Mock
     private Brand_Repository brand_repository;
 
     @InjectMocks
-    private  Brand_Service brand_service=null;
+    private  Brand_Service brand_service;
 
-    @Before
+    @BeforeTest
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
     }
@@ -32,10 +34,10 @@ public class BrandTest {
     public void testWith_TestNG() {
 
         
-         brand= new Brand("tv","toshiba ","sdfgh");
+        Brand brand= new Brand("tv","toshiba ","sdfgh");
         Mockito.when(brand_repository.existsById(brand.getName())).thenReturn(false);
       //  Mockito.when(brand_service.AddBrand(brand)).thenReturn(expected);
-        Assert.assertEquals(brand_service.AddBrand(brand),"admin_face");
+        assertEquals( brand_service.AddBrand(brand),"sdfgh");
     }
 
 
