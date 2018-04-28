@@ -2,11 +2,16 @@ package com.example.demo.Service;
 
 import com.example.demo.Entity.Brand;
 import com.example.demo.Repository.Brand_Repository;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.testng.annotations.BeforeMethod;
+
+import javax.inject.Inject;
+
+
 
 @Service
 public  class  Brand_Service {
@@ -15,15 +20,18 @@ public  class  Brand_Service {
 
     public Brand_Service() {
     }
-    public String AddBrand(Model model,  @ModelAttribute Brand pro) {
+    @BeforeMethod
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+    }
+    public String AddBrand( @ModelAttribute Brand pro) {
 
 
-        model.addAttribute("pro", new Brand());
         if (B_R.existsById(pro.getName())) {
             return "Add_Brand";
         }
         B_R.save(pro);
-        return "Add_Brand";
+        return "admin_face";
     }
 
 }

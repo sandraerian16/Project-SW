@@ -86,17 +86,7 @@ public class StoreController {
         return service.Add_Colla(model,Sub , request);
     }
 
-    @GetMapping("/Colla_Login")
-    public String Colla_Login(Model model) {
-        model.addAttribute("sub", new User());
-        return "Login_Collaborators";
-    }
 
-    @PostMapping("/Colla_Login")
-    public String Login_Info(Model model, @ModelAttribute User Sub,HttpServletRequest request,HttpServletResponse response) {
-
-        return service.Login(model, Sub,  request,  response);
-    }
 
     @GetMapping("/Add_Col")
     public String Add_Col(Model model)

@@ -73,12 +73,20 @@ public class User_Service {
                     else if (user.getType().equals("NormalUser")){
                         return"NormalUserPage";
                     }
+                    else if (user.getType().equals("Collaborators")){
+                        return"collaborators_Page";
+                    }
                 }
             } else {
                 return "login";
             }
         }
         return "register";
+    }
+
+    public void logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
     }
 
 
