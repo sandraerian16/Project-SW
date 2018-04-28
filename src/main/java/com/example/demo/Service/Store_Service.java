@@ -46,9 +46,9 @@ public class Store_Service {
         store.setOwner((String)session.getAttribute("username"));
 
         t.setOwner((String)session.getAttribute("username"));
-        System.out.println("T.get Owner: "+(String)session.getAttribute("username"));
+       System.out.println("T.get Owner: "+(String)session.getAttribute("username"));
         store_RB.save(store);
-        return "AddStore";
+        return "storeOwner_page";
     }
 
     public String Check_Approve(Model model, @ModelAttribute Store store)
@@ -63,8 +63,12 @@ public class Store_Service {
             store_RB.delete(s);
             store_RB.save(s);
             System.out.println("done");
+            return "admin_face";
+
         }
-        return "admin_face";
+
+            return "to_approve";
+
     }
     public String Check(Model model,@ModelAttribute User Sub ,@ModelAttribute Store store ,  HttpServletRequest request)
     {
@@ -146,11 +150,50 @@ public class Store_Service {
         return "Add_Collaborators";
     }
 
+  /*  public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request, HttpServletResponse response)
+    {
+        model.addAttribute("sub", new User());
+
+        if (sub.getPassword().equals("") || sub.getUser_name().equals("")) {
+            return "Login_Collaborators";
+        }
+
+        else {
+            Optional<User> optionalUser = User_RB.findById(sub.getUser_name());
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                if (user.getPassword().equals(sub.getPassword())) {
+
+                    response.setContentType("text/html");
+                    HttpSession session = request.getSession();
+                    session.invalidate();
+                    session=request.getSession();
+
+                    session.setAttribute("username",user.getUser_name());
+                    session.setAttribute("Address",user.getAddress());
+                    System.out.println(session.getId());
 
 
-
-
-
+                    if (user.getType().equals("Administrator")) {
+                        return "admin_face";
+                    }
+                    else if (user.getType().equals("StoreOwner")){
+                        return "storeOwner_page";
+                    }
+                    else if (user.getType().equals("NormalUser")){
+                        return"NormalUserPage";
+                    }
+                    else if(user.getType().equals("Collaborators"))
+                    {
+                        return "collaborators_Page";
+                    }
+                }
+            } else {
+                return "Login_Collaborators";
+            }
+        }
+        return "Add_Collaborators";
+    }*/
 }
 
 
