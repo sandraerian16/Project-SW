@@ -146,80 +146,10 @@ public class Store_Service {
         return "Add_Collaborators";
     }
 
-    public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request, HttpServletResponse response)
-    {
-        model.addAttribute("sub", new User());
-
-        if (sub.getPassword().equals("") || sub.getUser_name().equals("")) {
-            return "Login_Collaborators";
-        }
-
-        else {
-            Optional<User> optionalUser = User_RB.findById(sub.getUser_name());
-            if (optionalUser.isPresent()) {
-                User user = optionalUser.get();
-                if (user.getPassword().equals(sub.getPassword())) {
-
-                    response.setContentType("text/html");
-                    HttpSession session = request.getSession();
-                    session.invalidate();
-                    session=request.getSession();
-
-                    session.setAttribute("username",user.getUser_name());
-                    session.setAttribute("Address",user.getAddress());
-                    System.out.println(session.getId());
-
-
-                    if (user.getType().equals("Administrator")) {
-                        return "admin_face";
-                    }
-                    else if (user.getType().equals("StoreOwner")){
-                        return "storeOwner_page";
-                    }
-                    else if (user.getType().equals("NormalUser")){
-                        return"NormalUserPage";
-                    }
-                    else if(user.getType().equals("Collaborators"))
-                    {
-                        return "collaborators_Page";
-                    }
-                }
-            } else {
-                return "Login_Collaborators";
-            }
-        }
-        return "Add_Collaborators";
-    }
 
 
 
-   /* public String Login_Colla(Model model, @ModelAttribute Collaborators_Class sub, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("sub", new Collaborators_Class());
-        if (sub.getPassword_ID().equals("") || sub.getName().equals("")) {
-            return "Login_Collaborators";
-        } else {
-            Optional<Collaborators_Class> optionalCollaborator = Colla_RB.findById(sub.getName());
-            if (optionalCollaborator.isPresent()) {
-                Collaborators_Class C = optionalCollaborator.get();
-                if (C.getPassword_ID().equals(sub.getPassword_ID())) {
-                    response.setContentType("text/html");
-                    HttpSession session = request.getSession();
-                    session.invalidate();
-                    session = request.getSession();
-                    session.setAttribute("name", C.getName());
-                    session.setAttribute("Password", C.getPassword_ID());
-                    System.out.println(session.getId());
 
-                    return "collaborators_Page";
-                }
-
-            } else {
-                return "Login_Collaborators";
-            }
-        }
-        return "Add_Collaborators";
-
-    }*/
 
 }
 

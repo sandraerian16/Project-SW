@@ -3,18 +3,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Handling Form Submission</title>
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 
 
 <form action="#" th:action="@{/Register}" th:object="${sub}" method="post">
-    <p>Username: <input type="text" th:field="*{user_name}" /></p>
-    <p>Password: <input type="password" th:field="*{password}" /></p>
-    <p>bank_account :<input type="text" th:field="*{bank_account}" /></p>
-    <p>Email: <input type="text" th:field="*{email}" /></p>
-    <p>Address: <input type="text" th:field="*{address}" /></p>
-    <p>balance: <input type="text" th:field="*{balance}" /></p>
+    <p>Username<br/> <input type="text" th:field="*{user_name}" placeholder="your name.."/></p>
+    <p>Password<br/><input type="password" th:field="*{password}" placeholder="password.."/></p>
+    <p>bank_account<br/><input type="text" th:field="*{bank_account}" placeholder="bank account.."/></p>
+    <p>Email<br/><input type="text" th:field="*{email}" placeholder="valid email address.."/></p>
+    <p>Address<br/><input type="text" th:field="*{address}" placeholder="your personal physical address.."/></p>
+    <p>Balance<br/><input type="text" th:field="*{balance}" placeholder="money you have in your account.."/></p>
 
 
 
@@ -22,13 +23,13 @@
         <option value="NormalUser">Normal user</option>
         <option value="StoreOwner">Store Owner</option>
         <option value="Administrator">Administrator</option>
-    </select>
+</select>
 
 
     <p><input type="submit" value="Submit" />
 </form>
 <form action="#" th:action="@{/login}" method="get">
-<input  type="submit" value="login"  /></p>
+<input  type="submit" value="OR GO TO LOGIN PAGE"  /></p>
 </form>
 </body>
 </html>

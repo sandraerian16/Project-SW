@@ -2,18 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
     <title>Title</title>
 </head>
 
 <body>
 <form action="#" th:action="@{/AddProducttostore}" th:object="${prod}"  method="post">
-    <p>name: <input type="text" th:field="*{name}" /></p>
-    <p>type: <input type="text" th:field="*{product_type}" /></p>
-    <p>Store name: <input type="text" th:field="*{store_ID}" /></p>
+    <p>Product Name<br/><input type="text" th:field="*{name}" placeholder="product name that already exists in platform.."/></p>
+    <p>Product Type<br/> <input type="text" th:field="*{product_type}" placeholder="product type.."/></p>
+    <p>Store Name<br/><input type="text" th:field="*{store_ID}" placeholder="your store name.."/></p>
 
-    <p>Price: <input type="number" th:field="*{price}" /></p>
-    <p>Quntity: <input type="number" th:field="*{quntity}" /></p>
-    <p><input type="submit" value="Submit" />
+    <p>Price<br/> <input type="number" th:field="*{price}" placeholder="price should be in the range.."/></p>
+    <p>Quntity<br/><input type="number" th:field="*{quntity}" placeholder="the available quantity.."/></p>
+    <p><input type="submit" value="ADD PRODUCT TO STORE" />
+</form>
+<form action="#" th:action="@{/Back}" method="get">
+    <input  type="submit" value="return to menu"  /></p>
 </form>
 </body>
 </html>

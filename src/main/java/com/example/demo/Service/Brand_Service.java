@@ -15,15 +15,13 @@ public  class  Brand_Service {
 
     public Brand_Service() {
     }
-    public String AddBrand(Model model,  @ModelAttribute Brand pro) {
-
-
-        model.addAttribute("pro", new Brand());
+    public String AddBrand( Model model, @ModelAttribute Brand pro) {
+     model.addAttribute(pro);
         if (B_R.existsById(pro.getName())) {
             return "Add_Brand";
         }
         B_R.save(pro);
-        return "Add_Brand";
+        return "admin_face";
     }
 
 }

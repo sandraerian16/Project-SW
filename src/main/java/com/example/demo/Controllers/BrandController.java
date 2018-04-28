@@ -23,7 +23,10 @@ public class BrandController {
 
     @PostMapping("/AddBrand")
     public String AddBrand_info(Model model, @ModelAttribute Brand pro) {
-        return service.AddBrand(model, pro);
+
+        return service.AddBrand(model,pro);
+        //return "Add_Brand";
+
 
     }
 

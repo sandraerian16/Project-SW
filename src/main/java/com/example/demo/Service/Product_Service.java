@@ -29,8 +29,8 @@ public class Product_Service {
     public Product_Service() {
     }
 
-    public String AddProduct_ToStore(Model model, @ModelAttribute Product prod) {
-        model.addAttribute("prod", new Product());
+    public String AddProduct_ToStore( @ModelAttribute Product prod) {
+
 
         if (prod.getName().equals("") || prod.getProduct_type().equals("") || prod.getStore_ID().equals("") || prod.getPrice() == 0) {
             return "storeAddProduct";
@@ -54,8 +54,7 @@ public class Product_Service {
 
     }
 
-    public String EditProduct_ToStore(Model model, @ModelAttribute Product prod1) {
-        model.addAttribute("prod1", new Product());
+    public String EditProduct_ToStore( @ModelAttribute Product prod1) {
 
         if (prod1.getName().equals("") || prod1.getProduct_type().equals("") || prod1.getPrice() == 0) {
             return "storeEditProduct";
@@ -81,6 +80,7 @@ public class Product_Service {
                 Product_RB.deleteById(prod1.getName());
                 Product_RB.save(prod1);
 
+
                 Actions_RB.save(A1);
                 return "storeOwner_page";
             }
@@ -90,8 +90,8 @@ public class Product_Service {
 
     }
 
-    public String DeleteProduct_ToStore(Model model, @ModelAttribute Product prod2) {
-        model.addAttribute("prod2", new Product());
+    public String DeleteProduct_ToStore( @ModelAttribute Product prod2) {
+
 
         if (prod2.getName().equals("") ) {
             return "storeDeleteProduct";
@@ -117,9 +117,8 @@ public class Product_Service {
 
 
 
-    public String Buy_Product(Model model, @ModelAttribute temp temp, HttpServletRequest request) {
+    public String Buy_Product( @ModelAttribute temp temp, HttpServletRequest request) {
 
-        model.addAttribute(temp);
         HttpSession session = request.getSession();
         Optional<Product> product = Product_RB.findById(temp.getName());
         Optional<User> user = use.findById((String) session.getAttribute("username"));
@@ -191,8 +190,7 @@ public class Product_Service {
     }
 
 
-    public String UndoAction2(Model model,@ModelAttribute Actions Action) {
-        model.addAttribute("Action", new Actions());
+    public String UndoAction2(@ModelAttribute Actions Action) {
         Optional< Actions> actionOP = Actions_RB.findById(Action.getID());
         if(actionOP.isPresent())
         {

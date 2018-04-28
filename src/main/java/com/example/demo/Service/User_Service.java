@@ -37,8 +37,7 @@ public class User_Service {
     }
 
 
-    public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("sub", new User());
+    public String Login( Model model,@ModelAttribute User sub, HttpServletRequest request) {
 
         if (sub.getPassword().equals("") || sub.getUser_name().equals("")) {
             return "login";
@@ -50,7 +49,7 @@ public class User_Service {
                 User user = optionalUser.get();
                 if (user.getPassword().equals(sub.getPassword())) {
 
-                    response.setContentType("text/html");
+                    //response.setContentType("text/html");
                     HttpSession session = request.getSession();
                     session.invalidate();
                     session=request.getSession();
@@ -59,9 +58,6 @@ public class User_Service {
                     session.setAttribute("Address",user.getAddress());
                     session.setAttribute("type",user.getType());
                     System.out.println(session.getId());
-
-
-
 
 
                     if (user.getType().equals("Administrator")) {
@@ -73,12 +69,20 @@ public class User_Service {
                     else if (user.getType().equals("NormalUser")){
                         return"NormalUserPage";
                     }
+                    else if (user.getType().equals("Collaborators")){
+                        return"collaborators_Page";
+                    }
                 }
             } else {
                 return "login";
             }
         }
         return "register";
+    }
+
+    public void logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
     }
 
 

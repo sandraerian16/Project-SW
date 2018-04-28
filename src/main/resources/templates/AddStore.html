@@ -2,21 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
+
     <title>Title</title>
 </head>
 
 <body>
 <form action="#" th:action="@{/Addstore1}" th:object="${store}" method="post">
-    <p>name: <input type="text" th:field="*{store_name}"/></p>
-    <p>Telephone<input type="text" th:field="*{store_telephone}"/></p>
-    <p>type: <input type="text" th:field="*{type}"/></p>
-    <p>Address: <input type="text" th:field="*{store_address}"/></p>
+    <p>Store Name <br/><input type="text" th:field="*{store_name}" placeholder="store name.."/></p>
+    <p>Store Telephone<br/><input type="text" th:field="*{store_telephone}" placeholder="store telephone.."/></p>
+    <p>Store Type <br/><input type="text" th:field="*{type}"placeholder="eg:type1, type2, type3.."/></p>
+    <p>Store Address <br/> <input type="text" th:field="*{store_address}"/></p>
     <select th:field="*{location}">
         <option value="onLine">onLine</option>
         <option value="OnSite">onSite</option>
     </select>
 
-    <p><input type="submit" value="Submit"/>
+    <p><input type="submit" value="ADD STORE"/>
+</form>
+<form action="#" th:action="@{/Back}" method="get">
+    <input  type="submit" value="return to menu"  /></p>
 </form>
 </body>
 </html>

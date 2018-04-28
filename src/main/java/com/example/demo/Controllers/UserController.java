@@ -24,6 +24,7 @@ public class UserController {
     @Autowired UserReprository use;
 
 
+
     @GetMapping("/Register")
     public String Register(Model model) {
         model.addAttribute("sub", new User());
@@ -32,8 +33,9 @@ public class UserController {
 
     @PostMapping("/Register")
     public String Register_info(Model model, @ModelAttribute User sub) {
-       return service.Register(model, sub);
+        return service.Register(model, sub);
     }
+
 
     @GetMapping("/login")
     public String Login(Model model) {
@@ -42,9 +44,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String Login_Info(Model model, @ModelAttribute User sub,HttpServletRequest request,HttpServletResponse response) {
+    public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request) {
+        model.addAttribute("sub", new User());
 
-        return service.Login(model, sub,  request,  response);
+        return  service.Login( model,sub,  request);
+
     }
     @GetMapping("/showbalance")
     public ModelAndView show_balance(HttpServletRequest request)
@@ -59,7 +63,35 @@ public class UserController {
         }
         mv.setViewName("ViewBalance");
         return mv;
-
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,Model model)
+    {
+        service.logout(request);
+        return Login(model);
+    }
+    @GetMapping("/Back")
+    public String Back(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        String type=(String)session.getAttribute("type");
+        if(type.equals("Administrator"))
+        {
+            return "admin_face";
+        }
+        else if(type.equals("StoreOwner"))
+        {
+            return "storeOwner_page";
+        }
+        else if(type.equals("Collaborators"))
+        {
+            return "collaborators_Page";
+        }
+        else if(type.equals("NormalUser"))
+        {
+            return "NormalUserPage";
+        }
+        return "login";
 
     }
 }
