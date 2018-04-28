@@ -46,9 +46,9 @@ public class Store_Service {
         store.setOwner((String)session.getAttribute("username"));
 
         t.setOwner((String)session.getAttribute("username"));
-        System.out.println("T.get Owner: "+(String)session.getAttribute("username"));
+       System.out.println("T.get Owner: "+(String)session.getAttribute("username"));
         store_RB.save(store);
-        return "AddStore";
+        return "storeOwner_page";
     }
 
     public String Check_Approve(Model model, @ModelAttribute Store store)
@@ -63,8 +63,12 @@ public class Store_Service {
             store_RB.delete(s);
             store_RB.save(s);
             System.out.println("done");
+            return "admin_face";
+
         }
-        return "admin_face";
+
+            return "to_approve";
+
     }
     public String Check(Model model,@ModelAttribute User Sub ,@ModelAttribute Store store ,  HttpServletRequest request)
     {
@@ -146,7 +150,7 @@ public class Store_Service {
         return "Add_Collaborators";
     }
 
-    public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request, HttpServletResponse response)
+  /*  public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request, HttpServletResponse response)
     {
         model.addAttribute("sub", new User());
 
@@ -189,38 +193,7 @@ public class Store_Service {
             }
         }
         return "Add_Collaborators";
-    }
-
-
-
-   /* public String Login_Colla(Model model, @ModelAttribute Collaborators_Class sub, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("sub", new Collaborators_Class());
-        if (sub.getPassword_ID().equals("") || sub.getName().equals("")) {
-            return "Login_Collaborators";
-        } else {
-            Optional<Collaborators_Class> optionalCollaborator = Colla_RB.findById(sub.getName());
-            if (optionalCollaborator.isPresent()) {
-                Collaborators_Class C = optionalCollaborator.get();
-                if (C.getPassword_ID().equals(sub.getPassword_ID())) {
-                    response.setContentType("text/html");
-                    HttpSession session = request.getSession();
-                    session.invalidate();
-                    session = request.getSession();
-                    session.setAttribute("name", C.getName());
-                    session.setAttribute("Password", C.getPassword_ID());
-                    System.out.println(session.getId());
-
-                    return "collaborators_Page";
-                }
-
-            } else {
-                return "Login_Collaborators";
-            }
-        }
-        return "Add_Collaborators";
-
     }*/
-
 }
 
 

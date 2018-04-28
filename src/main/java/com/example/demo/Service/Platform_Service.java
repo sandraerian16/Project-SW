@@ -21,7 +21,7 @@ public class Platform_Service {
             return "addproduct";
         }
         platform.save(pro);
-        return "addproduct";
+        return "admin_face";
     }
 
 }
