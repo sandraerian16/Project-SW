@@ -1,5 +1,4 @@
 package com.example.demo.Controllers;
-
 import com.example.demo.Entity.Actions;
 import com.example.demo.Service.*;
 import com.example.demo.Entity.Product;
@@ -34,8 +33,8 @@ public class ProductController {
     }
 
     @PostMapping("/AddProducttostore")
-    public String AddProduct_ToStore_info( @ModelAttribute Product prod) {
-        return  service.AddProduct_ToStore( prod);
+    public String AddProduct_ToStore_info(Model model, @ModelAttribute Product prod) {
+        return  service.AddProduct_ToStore(model, prod);
     }
 
     @GetMapping("/editProductStore")
@@ -45,8 +44,8 @@ public class ProductController {
     }
 
     @PostMapping("/editProductStore")
-    public String EditProduct_ToStore_info( @ModelAttribute Product prod1) {
-        return  service.EditProduct_ToStore( prod1);
+    public String EditProduct_ToStore_info(Model model, @ModelAttribute Product prod1) {
+        return  service.EditProduct_ToStore(model, prod1);
     }
 
     @GetMapping("/deleteProductStore")
@@ -56,8 +55,8 @@ public class ProductController {
     }
 
     @PostMapping("/deleteProductStore")
-    public String DeleteProduct_ToStore_info( @ModelAttribute Product prod2) {
-        return  service.DeleteProduct_ToStore( prod2);
+    public String DeleteProduct_ToStore_info(Model model, @ModelAttribute Product prod2) {
+        return  service.DeleteProduct_ToStore(model, prod2);
     }
 
     @GetMapping("/searchproduct")
@@ -81,7 +80,7 @@ public class ProductController {
     @GetMapping("/viewstatistics")
     public ModelAndView ShowStatistics(Model model ,HttpServletRequest request) {
 
-      ArrayList<Product>sf = service.viewStatistic(request);
+        ArrayList<Product>sf = service.viewStatistic(request);
         ModelAndView mv = new ModelAndView();
         mv.addObject("sf", sf);
         mv.setViewName("statistics");
@@ -95,9 +94,9 @@ public class ProductController {
         return "buy";
     }
     @PostMapping("/Buy")
-    public String Buy_Product_info(@ModelAttribute temp temp, HttpServletRequest request) {
+    public String Buy_Product_info(Model model,@ModelAttribute temp temp, HttpServletRequest request) {
 
-       return service.Buy_Product(temp,request);
+        return service.Buy_Product(model, temp,request);
     }
     @GetMapping("/Undo")
     public String UndoAction(Model model) {
@@ -106,8 +105,8 @@ public class ProductController {
     }
 
     @PostMapping("/Undo")
-    public String UndoAction2(@ModelAttribute Actions Action) {
-        return service.UndoAction2( Action);
+    public String UndoAction2(Model model,@ModelAttribute Actions Action) {
+        return service.UndoAction2(model, Action);
 
 
     }

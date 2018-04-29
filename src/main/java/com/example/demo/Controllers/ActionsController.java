@@ -11,15 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.Service.Actions_Service;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Optional;
-
 @Controller
 public class ActionsController {
+
     @Autowired
     private ActionsRepository Actions_RB;
     @Autowired
@@ -31,20 +30,13 @@ public class ActionsController {
     public java.lang.String DeleteProduct_ToStore(Model model) {
         model.addAttribute("storeName", new Store());
 
-
         return "viewActionsST";
     }
+
     @PostMapping("/viewActionsST")
-    public ModelAndView SearchProduct(Model model , @ModelAttribute Store storeName ) {
-         ArrayList<Actions> st = service.storeActions(model, storeName);
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("st", st);
-        mv.setViewName("viewActions");
-        return mv;
+    public ModelAndView SearchProduct(Model model, @ModelAttribute Store storeName) {
+        return service.storeActions(model, storeName);
+
     }
-
-
-
-
-
 }
+

@@ -28,9 +28,32 @@ public class Product_Service {
 
     public Product_Service() {
     }
+    public String Gone(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        String type=(String)session.getAttribute("type");
+        if(type.equals("Administrator"))
+        {
+            return "admin_face";
+        }
+        else if(type.equals("StoreOwner"))
+        {
+            return "storeOwner_page";
+        }
+        else if(type.equals("Collaborators"))
+        {
+            return "collaborators_Page";
+        }
+        else if(type.equals("NormalUser"))
+        {
+            return "NormalUserPage";
+        }
+        return "login";
 
-    public String AddProduct_ToStore( @ModelAttribute Product prod) {
+    }
 
+    public String AddProduct_ToStore(Model model, @ModelAttribute Product prod) {
+        model.addAttribute("prod", new Product());
 
         if (prod.getName().equals("") || prod.getProduct_type().equals("") || prod.getStore_ID().equals("") || prod.getPrice() == 0) {
             return "storeAddProduct";
@@ -38,10 +61,12 @@ public class Product_Service {
         System.out.println(prod.getQuntity());
         Optional<Platform> optionalProduct = plat.findById(prod.getName());
 
-        if (optionalProduct.isPresent()) {
+        if (optionalProduct.isPresent())
+        {
 
             Platform temp_plat = optionalProduct.get();
-            if (store.existsById(prod.getStore_ID()) && temp_plat.getPrice_start() <= prod.getPrice() && temp_plat.getPrice_end() >= prod.getPrice()) {
+            if (store.existsById(prod.getStore_ID()) && temp_plat.getPrice_start() <= prod.getPrice() && temp_plat.getPrice_end() >= prod.getPrice())
+            {
                 Product_RB.save(prod);
                 Actions A1 = new Actions("ADD",prod.getName(),prod.getStore_ID(),prod.getProduct_type(),prod.getQuntity(),prod.getPrice());
 
@@ -51,10 +76,15 @@ public class Product_Service {
             return "storeAddProduct";
         }
         return "storeAddProduct";
-
     }
 
-    public String EditProduct_ToStore( @ModelAttribute Product prod1) {
+
+
+
+
+
+    public String EditProduct_ToStore(Model model, @ModelAttribute Product prod1) {
+        model.addAttribute("prod1", new Product());
 
         if (prod1.getName().equals("") || prod1.getProduct_type().equals("") || prod1.getPrice() == 0) {
             return "storeEditProduct";
@@ -80,7 +110,6 @@ public class Product_Service {
                 Product_RB.deleteById(prod1.getName());
                 Product_RB.save(prod1);
 
-
                 Actions_RB.save(A1);
                 return "storeOwner_page";
             }
@@ -90,8 +119,8 @@ public class Product_Service {
 
     }
 
-    public String DeleteProduct_ToStore( @ModelAttribute Product prod2) {
-
+    public String DeleteProduct_ToStore(Model model, @ModelAttribute Product prod2) {
+        model.addAttribute("prod2", new Product());
 
         if (prod2.getName().equals("") ) {
             return "storeDeleteProduct";
@@ -117,13 +146,15 @@ public class Product_Service {
 
 
 
-    public String Buy_Product( @ModelAttribute temp temp, HttpServletRequest request) {
+    public String Buy_Product(Model model, @ModelAttribute temp temp, HttpServletRequest request) {
 
+        model.addAttribute(temp);
         HttpSession session = request.getSession();
         Optional<Product> product = Product_RB.findById(temp.getName());
         Optional<User> user = use.findById((String) session.getAttribute("username"));
         User user1;
-        if (user.isPresent() && product.isPresent()) {
+        if (user.isPresent() && product.isPresent())
+        {
             System.out.println("true");
             user1 = user.get();
             Product s = product.get();
@@ -152,13 +183,21 @@ public class Product_Service {
                 s.setQuntity(s.getQuntity() - temp.num);
                 Product_RB.delete(s);
                 Product_RB.save(s);
+                String t = (String) session.getAttribute("type");
+                if (t.equals("StoreOwner")) {
+                    return "storeOwner_page";
+                }
+                return "NormalUserPage";
             }
+            return "buy";
+
         }
-        String t = (String) session.getAttribute("type");
+        /*String t = (String) session.getAttribute("type");
         if (t.equals("StoreOwner")) {
             return "storeOwner_page";
         }
-        return "NormalUserPage";
+        return "NormalUserPage";*/
+        return "buy";
 
     }
 
@@ -190,7 +229,8 @@ public class Product_Service {
     }
 
 
-    public String UndoAction2(@ModelAttribute Actions Action) {
+    public String UndoAction2(Model model,@ModelAttribute Actions Action) {
+        model.addAttribute("Action", new Actions());
         Optional< Actions> actionOP = Actions_RB.findById(Action.getID());
         if(actionOP.isPresent())
         {
