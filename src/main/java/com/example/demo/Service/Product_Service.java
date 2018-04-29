@@ -164,7 +164,9 @@ public class Product_Service {
 
     public ArrayList<Product> viewStatistic(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        String name = (String) session.getAttribute("username");
+        String name="";
+        try{
+        name= (String) session.getAttribute("username");}catch (Exception e){}
         Optional<User> opuser = use.findById(name);
         User Store_owner = new User();
         if (opuser.isPresent()) {

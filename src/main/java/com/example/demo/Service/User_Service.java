@@ -51,14 +51,16 @@ public class User_Service {
 
                     //response.setContentType("text/html");
                     HttpSession session = request.getSession();
-                    session.invalidate();
+                    //session.invalidate();
                     session=request.getSession();
-
-                    session.setAttribute("username",user.getUser_name());
-                    session.setAttribute("Address",user.getAddress());
-                    session.setAttribute("type",user.getType());
-                    System.out.println(session.getId());
-
+                    try {
+                        session.setAttribute("username", user.getUser_name());
+                        session.setAttribute("Address", user.getAddress());
+                        session.setAttribute("type", user.getType());
+                        System.out.println(session.getId());
+                    }catch(Exception e){
+                        System.out.println(e);
+                    }
 
                     if (user.getType().equals("Administrator")) {
                         return "admin_face";

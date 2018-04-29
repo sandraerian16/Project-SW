@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 import static org.testng.Assert.*;
+import static reactor.core.publisher.Mono.when;
 
 
 public class User_ServiceTest {
@@ -36,7 +37,6 @@ public class User_ServiceTest {
     }
     @Test
     public void testRegister_emptyinput() throws Exception {
-        //User user = new User("name","pass","email","sd","asd","NormalUser",100);
         User user = new User("","","email","sd","asd","NormalUser",100);
         assertEquals(service.Register(model,user),"register");
     }
@@ -57,6 +57,30 @@ public class User_ServiceTest {
         User user = new User("","","email","sd","asd","NormalUser",100);
 
         assertEquals(service.Login(model,user,request),"login");
+    }
+    @Test
+    public void testLogin_input_Admin() throws Exception {
+        User user = new User("name","pass","email","sd","asd","Administrator",100);
+        Mockito.when(reprository.findById("name")).thenReturn(Optional.ofNullable(user));
+        assertEquals(service.Login(model,user,request),"admin_face");
+    }
+    @Test
+    public void testLogin_input_NormalUser() throws Exception {
+        User user = new User("name","pass","email","sd","asd","NormalUser",100);
+        Mockito.when(reprository.findById("name")).thenReturn(Optional.ofNullable(user));
+        assertEquals(service.Login(model,user,request),"NormalUserPage");
+    }
+    @Test
+    public void testLogin_input_StoreOwner() throws Exception {
+        User user = new User("name","pass","email","sd","asd","StoreOwner",100);
+        Mockito.when(reprository.findById("name")).thenReturn(Optional.ofNullable(user));
+        assertEquals(service.Login(model,user,request),"storeOwner_page");
+    }
+    @Test
+    public void testLogin_input_Coll() throws Exception {
+        User user = new User("name","pass","email","sd","asd","Collaborators",100);
+        Mockito.when(reprository.findById("name")).thenReturn(Optional.ofNullable(user));
+        assertEquals(service.Login(model,user,request),"collaborators_Page");
     }
 
     @Test

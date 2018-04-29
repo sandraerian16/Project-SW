@@ -95,7 +95,7 @@ public class ProductController {
         return "buy";
     }
     @PostMapping("/Buy")
-    public String Buy_Product_info(@ModelAttribute temp temp, HttpServletRequest request) {
+    public String Buy_Product_info(@ModelAttribute temp temp, HttpServletRequest request) throws Exception {
 
        return service.Buy_Product(temp,request);
     }
