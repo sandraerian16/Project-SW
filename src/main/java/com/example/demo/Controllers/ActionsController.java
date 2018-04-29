@@ -35,7 +35,12 @@ public class ActionsController {
 
     @PostMapping("/viewActionsST")
     public ModelAndView SearchProduct(Model model, @ModelAttribute Store storeName) {
-        return service.storeActions(model, storeName);
+         ArrayList<Actions> st=service.storeActions(model, storeName);
+        ModelAndView mv = new ModelAndView();
+        mv = new ModelAndView();
+        mv.addObject("st", st);
+        mv.setViewName("viewActions");
+        return mv;
 
     }
 }

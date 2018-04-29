@@ -37,7 +37,7 @@ public class User_Service {
     }
 
 
-    public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request, HttpServletResponse response) {
+    public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request) {
         model.addAttribute("sub", new User());
 
         if (sub.getPassword().equals("") || sub.getUser_name().equals("")) {
@@ -50,7 +50,6 @@ public class User_Service {
                 User user = optionalUser.get();
                 if (user.getPassword().equals(sub.getPassword())) {
 
-                    response.setContentType("text/html");
                     HttpSession session = request.getSession();
                     //session.invalidate();
                     session=request.getSession();

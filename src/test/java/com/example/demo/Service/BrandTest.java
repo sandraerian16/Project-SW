@@ -14,6 +14,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Test;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
@@ -26,8 +28,12 @@ public class BrandTest {
     private Brand_Repository brand_repository;
     @Mock
     private Model model;
+    @Mock
+    private HttpServletRequest request;
     @InjectMocks
     private  Brand_Service brand_service;
+
+
 
     @BeforeTest
     public void setUp() throws Exception {
@@ -38,19 +44,17 @@ public class BrandTest {
 
 
         Brand brand= new Brand("tv","toshiba ","sdfgh");
-        assertEquals( brand_service.AddBrand(model,brand),"Add_Brand");
+        assertEquals( brand_service.AddBrand(model,brand,request),"Add_Brand");
     }
     @Test
     public void rightAdd() {
 
 
         Brand brand= new Brand("tv","toshiba ","sdfgh");
-        assertEquals( brand_service.AddBrand(model,brand),"admin_face");
+        assertEquals( brand_service.AddBrand(model,brand,request),"admin_face");
     }
     @Test
     public void foundinDB() {
-
-
         Brand brand= new Brand("tv","toshiba ","sdfgh");
         assertEquals(brand_repository.existsById(brand.getName()),true);
     }

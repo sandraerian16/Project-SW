@@ -14,6 +14,8 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import javax.servlet.http.HttpServletRequest;
+
 import static org.testng.Assert.assertEquals;
 
 public class platformTest {
@@ -22,6 +24,10 @@ public class platformTest {
     private Model model;
     @Mock
     private PlatformRepritory platformRepritory;
+
+    @Mock
+    private HttpServletRequest request;
+
     @InjectMocks
     private Platform_Service platform_service;
     @BeforeTest
@@ -33,14 +39,14 @@ public class platformTest {
 
         Platform platform= new Platform("product_name","product_brand", 3,  "product_category",5);
         //System.out.println( platform_service.AddProduct( model, platform));
-        assertEquals( platform_service.AddProduct( model, platform),"addproduct");
+        assertEquals( platform_service.AddProduct( model, platform,request),"addproduct");
     }
     @Test
     public void rightAdd() {
 
 
         Platform platform= new Platform("product_name","product_brand", 3,  "product_category",5);
-        assertEquals( platform_service.AddProduct(model,platform),"admin_face");
+        assertEquals( platform_service.AddProduct(model,platform,request),"admin_face");
     }
     @Test
     public void foundinDB() {

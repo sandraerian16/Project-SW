@@ -42,7 +42,7 @@ public class UserController {
     @PostMapping("/login")
     public String Login_Info(Model model, @ModelAttribute User sub,HttpServletRequest request,HttpServletResponse response) {
 
-        return service.Login(model, sub,  request,  response);
+        return service.Login(model, sub,  request);
     }
     @GetMapping("/showbalance")
     public ModelAndView show_balance(HttpServletRequest request)

@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.ui.Model;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Test;
@@ -24,7 +25,7 @@ public class Product_ServiceTest {
     private StoreReprository store;
 
     @Mock
-    ActionsRepository Actions_RB;
+    private ActionsRepository Actions_RB;
     @Mock
     private PlatformRepritory plat;
 
@@ -34,6 +35,8 @@ public class Product_ServiceTest {
     @Mock
     private HttpServletRequest request;
 
+    @Mock
+    private Model model;
     @InjectMocks
     private Product_Service service;
 
@@ -45,7 +48,7 @@ public class Product_ServiceTest {
     @Test
     public void testAddProduct_ToStore_emptyinput() throws Exception {
         Product p = new Product("", "", "", 0, 0, 0, 0);
-        assertEquals(service.AddProduct_ToStore(p), "storeAddProduct");
+        assertEquals(service.AddProduct_ToStore(model,p), "storeAddProduct");
     }
 
     @Test
@@ -57,7 +60,7 @@ public class Product_ServiceTest {
         Mockito.when(store.existsById(p.getStore_ID())).thenReturn(true);
         Mockito.when(reprository.save(p)).thenReturn(p);
         Mockito.when(Actions_RB.save(A1)).thenReturn(A1);
-        assertEquals(service.AddProduct_ToStore(p), "storeOwner_page");
+        assertEquals(service.AddProduct_ToStore(model,p), "storeOwner_page");
     }
 
     @Test
@@ -69,13 +72,13 @@ public class Product_ServiceTest {
         Mockito.when(store.existsById(p.getStore_ID())).thenReturn(false);
         Mockito.when(reprository.save(p)).thenReturn(p);
         Mockito.when(Actions_RB.save(A1)).thenReturn(A1);
-        assertEquals(service.AddProduct_ToStore(p), "storeAddProduct");
+        assertEquals(service.AddProduct_ToStore(model,p), "storeAddProduct");
     }
 
     @Test
     public void testEditProduct_ToStore_empty() throws Exception {
         Product p = new Product("", "", "", 0, 0, 0, 0);
-        assertEquals(service.EditProduct_ToStore(p), "storeEditProduct");
+        assertEquals(service.EditProduct_ToStore(model,p), "storeEditProduct");
     }
 
     @Test
@@ -87,7 +90,7 @@ public class Product_ServiceTest {
         Mockito.when(reprository.findById(p.getName())).thenReturn(java.util.Optional.ofNullable(p));
         Mockito.when(reprository.save(p)).thenReturn(p);
         Mockito.when(Actions_RB.save(A1)).thenReturn(A1);
-        assertEquals(service.EditProduct_ToStore(p), "storeOwner_page");
+        assertEquals(service.EditProduct_ToStore(model,p), "storeOwner_page");
     }
 
     @Test
@@ -97,7 +100,7 @@ public class Product_ServiceTest {
         Actions A1 = new Actions("ADD", p.getName(), p.getStore_ID(), p.getProduct_type(), p.getQuntity(), p.getPrice());
         Mockito.when(reprository.save(p)).thenReturn(p);
         Mockito.when(Actions_RB.save(A1)).thenReturn(A1);
-        assertEquals(service.EditProduct_ToStore(p), "storeEditProduct");
+        assertEquals(service.EditProduct_ToStore(model,p), "storeEditProduct");
     }
 
     @Test
@@ -109,13 +112,13 @@ public class Product_ServiceTest {
         Mockito.when(reprository.findById(p.getName())).thenReturn(java.util.Optional.ofNullable(p));
         Mockito.when(reprository.save(p)).thenReturn(p);
         Mockito.when(Actions_RB.save(A1)).thenReturn(A1);
-        assertEquals(service.EditProduct_ToStore(p), "storeEditProduct");
+        assertEquals(service.EditProduct_ToStore(model,p), "storeEditProduct");
     }
 
     @Test
     public void testDeleteProduct_ToStore_empty() throws Exception {
         Product p = new Product("", "store", "type", 10, 5, 0, 0);
-        assertEquals(service.DeleteProduct_ToStore(p), "storeDeleteProduct");
+        assertEquals(service.DeleteProduct_ToStore(model,p), "storeDeleteProduct");
     }
 
     @Test
@@ -126,7 +129,7 @@ public class Product_ServiceTest {
         Mockito.when(reprository.findById(p.getName())).thenReturn(java.util.Optional.ofNullable(p));
         Mockito.when(reprository.existsById(p.getName())).thenReturn(true);
         Mockito.when(Actions_RB.save(A1)).thenReturn(A1);
-        assertEquals(service.DeleteProduct_ToStore(p), "storeOwner_page");
+        assertEquals(service.DeleteProduct_ToStore(model,p), "storeOwner_page");
     }
   /*  @Test
     public void testBuy_Product() throws Exception {
@@ -162,7 +165,7 @@ public class Product_ServiceTest {
     public void testUndoAction2_ADD() throws Exception {
         Actions A1 = new Actions("ADD", "name", "store", "type", 10, 5);
         Mockito.when(Actions_RB.findById(A1.getID())).thenReturn(java.util.Optional.ofNullable(A1));
-        assertEquals(service.UndoAction2(A1),"storeOwner_page");
+        assertEquals(service.UndoAction2(model,A1),"storeOwner_page");
 
     }
     @Test
@@ -172,7 +175,7 @@ public class Product_ServiceTest {
                 ,action.getProduct_quntity(),action.getProduct_price(),0,0);
         Mockito.when(reprository.save(product)).thenReturn(product);
         Mockito.when(Actions_RB.findById(action.getID())).thenReturn(java.util.Optional.ofNullable(action));
-        assertEquals(service.UndoAction2(action),"storeOwner_page");
+        assertEquals(service.UndoAction2(model,action),"storeOwner_page");
 
     }
 
@@ -182,7 +185,7 @@ public class Product_ServiceTest {
         Product product = new Product(action.getProductName(),action.getStoreID(),action.getProduct_type()
                 ,action.getProduct_quntity(),action.getProduct_price(),0,0);
         Mockito.when(reprository.save(product)).thenReturn(product);
-        assertEquals(service.UndoAction2(action),"storeOwner_page");
+        assertEquals(service.UndoAction2(model,action),"storeOwner_page");
 
     }
 
