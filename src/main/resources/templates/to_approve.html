@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
+    <link th:href="@{/css.css}" rel="stylesheet" />
 
-    <title>Title</title>
+    <title>to_approve</title>
 </head>
 <body>
-<form action="#" th:action="@{/approve}" th:object="${f}"   method="post">
+<form action="#" th:action="@{/approve}" th:object="${f}" method="post">
     <p>Enter Store Name To Approve<br/> <input type="text" th:field="*{store_name}" placeholder="store name.."/> </p>
     <input type="submit" value="Approve Store"/>
 

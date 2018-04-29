@@ -34,6 +34,29 @@ public class Store_Service {
 
     public Store_Service() {
     }
+    public String Gone(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        String type=(String)session.getAttribute("type");
+        if(type.equals("Administrator"))
+        {
+            return "admin_face";
+        }
+        else if(type.equals("StoreOwner"))
+        {
+            return "storeOwner_page";
+        }
+        else if(type.equals("Collaborators"))
+        {
+            return "collaborators_Page";
+        }
+        else if(type.equals("NormalUser"))
+        {
+            return "NormalUserPage";
+        }
+        return "login";
+
+    }
 
     Store t= new Store();
     public String AddStore(Model model, @ModelAttribute Store store, HttpServletRequest request)
@@ -46,9 +69,10 @@ public class Store_Service {
         store.setOwner((String)session.getAttribute("username"));
 
         t.setOwner((String)session.getAttribute("username"));
-       System.out.println("T.get Owner: "+(String)session.getAttribute("username"));
+        System.out.println("T.get Owner: "+(String)session.getAttribute("username"));
         store_RB.save(store);
-        return "storeOwner_page";
+
+        return Gone(request);
     }
 
     public String Check_Approve(Model model, @ModelAttribute Store store)
@@ -58,17 +82,21 @@ public class Store_Service {
         if (stor.isPresent())
         {
             Store s = stor.get();
-           // t=s;
-            s.setApproved(true);
-            store_RB.delete(s);
-            store_RB.save(s);
-            System.out.println("done");
-            return "admin_face";
 
+            if(s.getApproved()==true)
+            {
+                return "to_approve";
+            }
+            else
+            {
+                s.setApproved(true);
+                store_RB.delete(s);
+                store_RB.save(s);
+                System.out.println("done");
+                return "admin_face";
+            }
         }
-
-            return "to_approve";
-
+        return "to_approve";
     }
     public String Check(Model model,@ModelAttribute User Sub ,@ModelAttribute Store store ,  HttpServletRequest request)
     {
@@ -145,12 +173,14 @@ public class Store_Service {
 
             store_RB.delete(t);
             store_RB.save(t);
+            User_RB.save(Sub);
+            return Gone(request);
         }
         User_RB.save(Sub);
-        return "Add_Collaborators";
+        return "Add_Collaborators" ;
     }
 
-  /*  public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request, HttpServletResponse response)
+    public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request, HttpServletResponse response)
     {
         model.addAttribute("sub", new User());
 
@@ -193,7 +223,38 @@ public class Store_Service {
             }
         }
         return "Add_Collaborators";
+    }
+
+
+
+   /* public String Login_Colla(Model model, @ModelAttribute Collaborators_Class sub, HttpServletRequest request, HttpServletResponse response) {
+        model.addAttribute("sub", new Collaborators_Class());
+        if (sub.getPassword_ID().equals("") || sub.getName().equals("")) {
+            return "Login_Collaborators";
+        } else {
+            Optional<Collaborators_Class> optionalCollaborator = Colla_RB.findById(sub.getName());
+            if (optionalCollaborator.isPresent()) {
+                Collaborators_Class C = optionalCollaborator.get();
+                if (C.getPassword_ID().equals(sub.getPassword_ID())) {
+                    response.setContentType("text/html");
+                    HttpSession session = request.getSession();
+                    session.invalidate();
+                    session = request.getSession();
+                    session.setAttribute("name", C.getName());
+                    session.setAttribute("Password", C.getPassword_ID());
+                    System.out.println(session.getId());
+
+                    return "collaborators_Page";
+                }
+
+            } else {
+                return "Login_Collaborators";
+            }
+        }
+        return "Add_Collaborators";
+
     }*/
+
 }
 
 

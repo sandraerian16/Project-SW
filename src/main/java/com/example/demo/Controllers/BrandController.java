@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.Service.Brand_Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class BrandController {
 
@@ -22,13 +24,9 @@ public class BrandController {
     }
 
     @PostMapping("/AddBrand")
-    public String AddBrand_info(Model model, @ModelAttribute Brand pro) {
-
-        return service.AddBrand(model,pro);
-        //return "Add_Brand";
-
+    public String AddBrand_info(Model model, @ModelAttribute Brand pro, HttpServletRequest request) {
+        return service.AddBrand(model, pro,request);
 
     }
 
 }
-

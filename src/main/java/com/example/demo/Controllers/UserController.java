@@ -1,5 +1,4 @@
 package com.example.demo.Controllers;
-
 import com.example.demo.Entity.User;
 import com.example.demo.Repository.UserReprository;
 import com.example.demo.Service.User_Service;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
-
 @SessionAttributes("User")
 @Controller
 public class UserController {
@@ -22,7 +20,6 @@ public class UserController {
     @Autowired
     private User_Service service;
     @Autowired UserReprository use;
-
 
 
     @GetMapping("/Register")
@@ -36,7 +33,6 @@ public class UserController {
         return service.Register(model, sub);
     }
 
-
     @GetMapping("/login")
     public String Login(Model model) {
         model.addAttribute("sub", new User());
@@ -44,11 +40,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request) {
-        model.addAttribute("sub", new User());
+    public String Login_Info(Model model, @ModelAttribute User sub,HttpServletRequest request,HttpServletResponse response) {
 
-        return  service.Login( model,sub,  request);
-
+        return service.Login(model, sub,  request,  response);
     }
     @GetMapping("/showbalance")
     public ModelAndView show_balance(HttpServletRequest request)

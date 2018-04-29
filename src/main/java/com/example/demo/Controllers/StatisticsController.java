@@ -1,5 +1,4 @@
 package com.example.demo.Controllers;
-
 import com.example.demo.Entity.Platform;
 import com.example.demo.Entity.Product;
 import com.example.demo.Entity.Statistics;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 
 @Controller
 public class StatisticsController {
@@ -37,7 +35,7 @@ public class StatisticsController {
 
     @PostMapping("/AddStat")
     public String submit(Model model, @ModelAttribute Statistics stat) {
-      return service.AddStat(model,stat);
+        return service.AddStat(model,stat);
     }
 
     @GetMapping("/num_brands")
@@ -134,7 +132,7 @@ public class StatisticsController {
     public ModelAndView viewStat(Model model)
     {
         Statistics  stat=new Statistics();
-     //   ArrayList<Statistics> st = new ArrayList<>();
+        //   ArrayList<Statistics> st = new ArrayList<>();
         Iterable<Statistics> s =Srip.findAll();
 
         ModelAndView mv = new ModelAndView();

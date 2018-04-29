@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Service
 public  class  Brand_Service {
     @Autowired
@@ -15,13 +18,38 @@ public  class  Brand_Service {
 
     public Brand_Service() {
     }
-    public String AddBrand( Model model, @ModelAttribute Brand pro) {
-     model.addAttribute(pro);
-        if (B_R.existsById(pro.getName())) {
+    public String Gone(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        String type=(String)session.getAttribute("type");
+        if(type.equals("Administrator"))
+        {
+            return "admin_face";
+        }
+        else if(type.equals("StoreOwner"))
+        {
+            return "storeOwner_page";
+        }
+        else if(type.equals("Collaborators"))
+        {
+            return "collaborators_Page";
+        }
+        else if(type.equals("NormalUser"))
+        {
+            return "NormalUserPage";
+        }
+        return "login";
+
+    }
+    public String AddBrand(Model model,  @ModelAttribute Brand pro, HttpServletRequest request) {
+
+        model.addAttribute("pro", new Brand());
+        if (B_R.existsById(pro.getName()))
+        {
             return "Add_Brand";
         }
         B_R.save(pro);
-        return "admin_face";
+        return Gone(request);
     }
 
 }

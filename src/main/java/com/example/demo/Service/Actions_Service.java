@@ -16,9 +16,10 @@ public class Actions_Service {
     @Autowired
     private ActionsRepository Actions_RB;
 
-    public ArrayList<Actions> storeActions(Model model , @ModelAttribute Store storeName ) {
+    public ModelAndView storeActions(Model model , @ModelAttribute Store storeName ) {
         ArrayList<Actions> st = new ArrayList<>();
         Iterable<Actions> s = Actions_RB.findAll();
+        ModelAndView mv = null;
 
         System.out.println("fdgdfs : " + storeName.getStore_name());
         for (Actions t : s) {
@@ -27,7 +28,9 @@ public class Actions_Service {
             }
             // st.add(t);
         }
-        return st;
-
+        mv = new ModelAndView();
+        mv.addObject("st", st);
+        mv.setViewName("viewActions");
+        return mv;
     }
 }
