@@ -18,30 +18,8 @@ public  class  Brand_Service {
 
     public Brand_Service() {
     }
-    public String Gone(HttpServletRequest request)
-    {
-        HttpSession session = request.getSession();
-        String type=(String)session.getAttribute("type");
-        if(type.equals("Administrator"))
-        {
-            return "admin_face";
-        }
-        else if(type.equals("StoreOwner"))
-        {
-            return "storeOwner_page";
-        }
-        else if(type.equals("Collaborators"))
-        {
-            return "collaborators_Page";
-        }
-        else if(type.equals("NormalUser"))
-        {
-            return "NormalUserPage";
-        }
-        return "login";
 
-    }
-    public String AddBrand(Model model,  @ModelAttribute Brand pro, HttpServletRequest request) {
+    public String AddBrand(Model model,  @ModelAttribute Brand pro) {
 
         model.addAttribute("pro", new Brand());
         if (B_R.existsById(pro.getName()))
@@ -49,7 +27,7 @@ public  class  Brand_Service {
             return "Add_Brand";
         }
         B_R.save(pro);
-        return Gone(request);
+        return "admin_face";
     }
 
 }

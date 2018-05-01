@@ -25,7 +25,7 @@ public class BrandController {
 
     @PostMapping("/AddBrand")
     public String AddBrand_info(Model model, @ModelAttribute Brand pro, HttpServletRequest request) {
-        return service.AddBrand(model, pro,request);
+        return service.AddBrand(model, pro);
 
     }
 
