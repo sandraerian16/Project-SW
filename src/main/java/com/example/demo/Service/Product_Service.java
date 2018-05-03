@@ -26,30 +26,32 @@ public class Product_Service {
     @Autowired
     ActionsRepository Actions_RB;
 
+    @Autowired
+    private StoreReprository store_RB;
+    Store t= new Store();
     public Product_Service() {
     }
-    public String Gone(HttpServletRequest request)
+    public String Check(Model model,@ModelAttribute User Sub ,@ModelAttribute Store store ,  HttpServletRequest request)
     {
         HttpSession session = request.getSession();
-        String type=(String)session.getAttribute("type");
-        if(type.equals("Administrator"))
+        System.out.println("OOO: "+(String)session.getAttribute("username"));
+        model.addAttribute(store);
+        Optional<Store> stor = store_RB.findById(store.getStore_name());
+        if (stor.isPresent())
         {
-            return "admin_face";
-        }
-        else if(type.equals("StoreOwner"))
-        {
-            return "storeOwner_page";
-        }
-        else if(type.equals("Collaborators"))
-        {
-            return "collaborators_Page";
-        }
-        else if(type.equals("NormalUser"))
-        {
-            return "NormalUserPage";
-        }
-        return "login";
+            Store s = stor.get();
+            t=stor.get();
+            //s.setApproved(true);
 
+            store_RB.delete(s);
+            store_RB.save(s);
+            t.setOwner("Alaa");
+            System.out.println("OWner T: "+t.getOwner());
+            System.out.println("done");
+            System.out.println("T:>>>>>>>>>: "+t.getStore_name());
+            return "storeAddProduct";
+        }
+        return "Store_Check_Add_Product";
     }
 
     public String AddProduct_ToStore(Model model, @ModelAttribute Product prod) {
@@ -77,11 +79,6 @@ public class Product_Service {
         }
         return "storeAddProduct";
     }
-
-
-
-
-
 
     public String EditProduct_ToStore(Model model, @ModelAttribute Product prod1) {
         model.addAttribute("prod1", new Product());
@@ -144,8 +141,6 @@ public class Product_Service {
 
     }
 
-
-
     public String Buy_Product(Model model, @ModelAttribute temp temp, HttpServletRequest request) {
 
         model.addAttribute(temp);
@@ -203,9 +198,7 @@ public class Product_Service {
 
     public ArrayList<Product> viewStatistic(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        String name="";
-        try{
-        name= (String) session.getAttribute("username");}catch (Exception e){}
+        String name = (String) session.getAttribute("username");
         Optional<User> opuser = use.findById(name);
         User Store_owner = new User();
         if (opuser.isPresent()) {
@@ -229,7 +222,6 @@ public class Product_Service {
         }
         return sf;
     }
-
 
     public String UndoAction2(Model model,@ModelAttribute Actions Action) {
         model.addAttribute("Action", new Actions());
@@ -266,6 +258,5 @@ public class Product_Service {
 
         return "storeOwner_page";
     }
-
 
 }

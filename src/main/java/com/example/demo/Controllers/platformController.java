@@ -26,7 +26,7 @@ public class platformController {
     }
 
     @PostMapping("/AddProduct")
-    public String AddProduct_info(Model model, @ModelAttribute Platform pro, HttpServletRequest request) {
-        return service.AddProduct(model, pro,request);
+    public String AddProduct_info(Model model, @ModelAttribute Platform pro) {
+        return service.AddProduct(model, pro);
     }
 }

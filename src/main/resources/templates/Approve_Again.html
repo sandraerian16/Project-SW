@@ -3,13 +3,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
-    <title>Choice</title>
+
+    <title>Approve_Again</title>
 </head>
 <body>
-<form action="#" th:action="@{/Add_Col}" th:object="${f}"  method="post">
-    <p>Store Name <br/> <input type="text" th:field="*{store_name}" placeholder="store name.."/> </p>
-    <input type="submit" value="Enter"/>
-
+<form action="#" th:action="@{/Approve_Again}" th:object="${f}" method="post">
+    <p>Enter Store Name To Approve<br/> <input type="text" th:field="*{store_name}" placeholder="store name.."/> </p>
+    <input type="submit" value="Approve Store"/>
 
 </form>
 <form action="#" th:action="@{/Back}" method="get">

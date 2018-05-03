@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
-    <title>Choice</title>
+    <link th:href="@{/css.css}" rel="stylesheet" />
+    <title>Store_Check_Add_Product</title>
 </head>
 <body>
-<form action="#" th:action="@{/Add_Col}" th:object="${f}"  method="post">
+<form action="#" th:action="@{/Store_Check_Add_Product}" th:object="${f}"  method="post">
     <p>Store Name <br/> <input type="text" th:field="*{store_name}" placeholder="store name.."/> </p>
     <input type="submit" value="Enter"/>
 
@@ -17,3 +17,6 @@
 </form>
 </body>
 </html>
+
+
+
