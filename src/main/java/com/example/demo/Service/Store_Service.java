@@ -34,32 +34,10 @@ public class Store_Service {
 
     public Store_Service() {
     }
-    public String Gone(HttpServletRequest request)
-    {
-        HttpSession session = request.getSession();
-        String type=(String)session.getAttribute("type");
-        if(type.equals("Administrator"))
-        {
-            return "admin_face";
-        }
-        else if(type.equals("StoreOwner"))
-        {
-            return "storeOwner_page";
-        }
-        else if(type.equals("Collaborators"))
-        {
-            return "collaborators_Page";
-        }
-        else if(type.equals("NormalUser"))
-        {
-            return "NormalUserPage";
-        }
-        return "login";
 
-    }
 
     Store t= new Store();
-    public String AddStore(Model model, @ModelAttribute Store store, HttpServletRequest request)
+    public String AddStore(Model model, @ModelAttribute Store store,HttpServletRequest request)
     {
         model.addAttribute("store", new Store());
         if (store.getStore_name().equals("") || store.getStore_telephone().equals("") || store.getType().equals("") || store.getLocation().equals("")) {
@@ -71,8 +49,7 @@ public class Store_Service {
         t.setOwner((String)session.getAttribute("username"));
         System.out.println("T.get Owner: "+(String)session.getAttribute("username"));
         store_RB.save(store);
-
-        return Gone(request);
+        return "storeOwner_page";
     }
 
     public String Check_Approve(Model model, @ModelAttribute Store store)
@@ -85,7 +62,7 @@ public class Store_Service {
 
             if(s.getApproved()==true)
             {
-                return "to_approve";
+                return "Approve_Again";
             }
             else
             {
@@ -97,6 +74,7 @@ public class Store_Service {
             }
         }
         return "to_approve";
+        //return "Approve_Again";
     }
     public String Check(Model model,@ModelAttribute User Sub ,@ModelAttribute Store store ,  HttpServletRequest request)
     {
@@ -119,6 +97,7 @@ public class Store_Service {
             System.out.println("T:>>>>>>>>>: "+t.getStore_name());
         }
         return "CPage";
+        //return "Add_Collaborators";
     }
 
     public String Add_Colla(Model model, @ModelAttribute User Sub, HttpServletRequest request)
@@ -143,7 +122,7 @@ public class Store_Service {
             ArrayList<String> Collaborators= new ArrayList<>();
 
             Store s = stor.get();
-           // s.setOwner("Alaa");
+            // s.setOwner("Alaa");
             System.out.println("Found");
             System.out.println("Store Name: "+s.getStore_name());
             System.out.println("Store Owner: "+s.getOwner());
@@ -169,12 +148,13 @@ public class Store_Service {
                 System.out.println("C: "+t.getCollaborators().get(k));
             }
             //t.setCollaborators(Collaborators);
-           // System.out.println(t.getCollaborators().get(0));
+            // System.out.println(t.getCollaborators().get(0));
 
             store_RB.delete(t);
             store_RB.save(t);
             User_RB.save(Sub);
-            return Gone(request);
+            return  "storeOwner_page";
+            //return Gone(request);
         }
         User_RB.save(Sub);
         return "Add_Collaborators" ;
@@ -224,6 +204,45 @@ public class Store_Service {
         }
         return "Add_Collaborators";
     }
+
+    public String Check_Again(Model model,@ModelAttribute User Sub ,@ModelAttribute Store store ,  HttpServletRequest request)
+    {
+        model.addAttribute(store);
+        Optional<Store> stor = store_RB.findById(store.getStore_name());
+        if (stor.isPresent())
+        {
+            Store s = stor.get();
+
+            if(s.getApproved()==true)
+            {
+                return "to_approve";
+            }
+            else
+            {
+                s.setApproved(true);
+                store_RB.delete(s);
+                store_RB.save(s);
+                System.out.println("done");
+                return "admin_face";
+            }
+        }
+        //return "to_approve";
+        return "to_approve";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

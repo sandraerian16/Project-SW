@@ -43,8 +43,8 @@ public class StoreController {
         return "AddStore";
     }
     @PostMapping("/Addstore1")
-    public String AddStore_Info(Model model, @ModelAttribute Store store, HttpServletRequest request) {
-        return  service.AddStore(model, store,request) ;
+    public String AddStore_Info(Model model, @ModelAttribute Store store) {
+        return  service.AddStore(model, store) ;
     }
 
     @GetMapping("/Showstores")
