@@ -209,30 +209,40 @@ public class Product_Service {
     }
 
     public ArrayList<Product> viewStatistic(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        String name = (String) session.getAttribute("username");
-        Optional<User> opuser = use.findById(name);
+        HttpSession session;
+        String name="";
+        try {
+            session = request.getSession();
+            name = (String) session.getAttribute("username");
+        }catch (Exception e){
+            System.out.println(e);
+        }
         User Store_owner = new User();
-        if (opuser.isPresent()) {
+        if (use.existsById(name)) {
+            Optional<User> opuser = use.findById(name);
             Store_owner = opuser.get();
-        }
-        Iterable<Store> arr = store.findAll();   // all the stores in the system
-        ArrayList<String> list = new ArrayList<>(); // all the stores that is owned by the logged in storeowner
-        for (Store s : arr) {
-            if (s.getApproved() && s.getOwner().equals(Store_owner.getUser_name())) {
-                list.add(s.getStore_name());
-            }
-        }
-        ArrayList<Product> sf = new ArrayList<>();
-        Iterable<Product> f = Product_RB.findAll();
-        for (Product h : f) {
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).equals(h.getStore_ID())) {
-                    sf.add(h);
+
+            Iterable<Store> arr = store.findAll();   // all the stores in the system
+            ArrayList<String> list = new ArrayList<>(); // all the stores that is owned by the logged in storeowner
+            for (Store s : arr) {
+                if (s.getApproved() && s.getOwner().equals(Store_owner.getUser_name())) {
+                    list.add(s.getStore_name());
                 }
             }
+            ArrayList<Product> sf = new ArrayList<>();
+            Iterable<Product> f = Product_RB.findAll();
+            for (Product h : f) {
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).equals(h.getStore_ID())) {
+                        sf.add(h);
+                    }
+                }
+            }
+            return sf;
         }
-        return sf;
+        ArrayList<Product> sff = new ArrayList<>();
+        return sff;
+
     }
 
 
