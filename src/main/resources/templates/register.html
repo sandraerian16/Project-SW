@@ -1,10 +1,9 @@
-
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Handling Form Submission</title>
-    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 
@@ -18,18 +17,17 @@
     <p>Balance<br/><input type="text" th:field="*{balance}" placeholder="money you have in your account.."/></p>
 
 
-
     <select th:field="*{type}">
         <option value="NormalUser">Normal user</option>
         <option value="StoreOwner">Store Owner</option>
         <option value="Administrator">Administrator</option>
-</select>
+    </select>
 
 
-    <p><input type="submit" value="Submit" />
+    <p><input type="submit" value="Submit"/>
 </form>
 <form action="#" th:action="@{/login}" method="get">
-<input  type="submit" value="OR GO TO LOGIN PAGE"  /></p>
+    <input type="submit" value="OR GO TO LOGIN PAGE"/></p>
 </form>
 </body>
 </html>

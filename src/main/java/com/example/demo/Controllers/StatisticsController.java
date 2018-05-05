@@ -1,4 +1,5 @@
 package com.example.demo.Controllers;
+
 import com.example.demo.Entity.Platform;
 import com.example.demo.Entity.Product;
 import com.example.demo.Entity.Statistics;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class StatisticsController {
@@ -35,7 +37,7 @@ public class StatisticsController {
 
     @PostMapping("/AddStat")
     public String submit(Model model, @ModelAttribute Statistics stat) {
-        return service.AddStat(model,stat);
+        return service.AddStat(model, stat);
     }
 
     @GetMapping("/num_brands")
@@ -66,7 +68,7 @@ public class StatisticsController {
         String name = brand.getEntity();
         brand.setEntity("Brand");
         brand.setFunction("Number of products with specific brand(" + name + ")");
-        Iterable<Platform> arr = service.brand_product(model,brand);
+        Iterable<Platform> arr = service.brand_product(model, brand);
         long num = 0;
         for (Platform p : arr) {
             if (p.getProduct_brand().equals(name)) {
@@ -86,19 +88,17 @@ public class StatisticsController {
     @GetMapping("/maxP")
     public String productstat() {
         Iterable<Product> arr = service.Max();
-        long Max=0;
-        String name="";
-        for (Product p : arr)
-        {
-            if(p.getNum_buy()>Max)
-            {
+        long Max = 0;
+        String name = "";
+        for (Product p : arr) {
+            if (p.getNum_buy() > Max) {
                 Max = p.getNum_buy();
-                name=p.getName();
+                name = p.getName();
 
             }
         }
-        Statistics stat = new Statistics("Product ("+name+")","Max",Max);
-        if(Srip.existsById(stat.getFunction())){
+        Statistics stat = new Statistics("Product (" + name + ")", "Max", Max);
+        if (Srip.existsById(stat.getFunction())) {
             Srip.delete(stat);
             Srip.save(stat);
         }
@@ -109,18 +109,16 @@ public class StatisticsController {
     @GetMapping("/minP")
     public String productstat2() {
         Iterable<Product> arr = service.Min();
-        long Min=1000000;
-        String name="";
-        for (Product p : arr)
-        {
-            if(p.getNum_buy()<Min)
-            {
+        long Min = 1000000;
+        String name = "";
+        for (Product p : arr) {
+            if (p.getNum_buy() < Min) {
                 Min = p.getNum_buy();
-                name=p.getName();
+                name = p.getName();
             }
         }
-        Statistics stat = new Statistics("Product ("+name+")","Min",Min);
-        if(Srip.existsById(stat.getFunction())){
+        Statistics stat = new Statistics("Product (" + name + ")", "Min", Min);
+        if (Srip.existsById(stat.getFunction())) {
             Srip.delete(stat);
             Srip.save(stat);
         }
@@ -129,11 +127,10 @@ public class StatisticsController {
     }
 
     @GetMapping("/ViewStat")
-    public ModelAndView viewStat(Model model)
-    {
-        Statistics  stat=new Statistics();
+    public ModelAndView viewStat(Model model) {
+        Statistics stat = new Statistics();
         //   ArrayList<Statistics> st = new ArrayList<>();
-        Iterable<Statistics> s =Srip.findAll();
+        Iterable<Statistics> s = Srip.findAll();
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("s", s);
@@ -142,7 +139,6 @@ public class StatisticsController {
         return mv;
 
     }
-
 
 
 }

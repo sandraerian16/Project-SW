@@ -2,49 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>StoreOwnerPage</title>
-    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 <body>
+<h1>Welcome,
+    <p1 th:text="${name}"></p1>
+</h1>
+
 <form action="#" th:action="@{/Addstore1}" method="get">
-  <p>  <input  type="submit" value="Add Store"  /></p>
+    <p><input type="submit" value="Add Store"/></p>
 </form>
 <form action="#" th:action="@{/AddProducttostore}" method="get">
-   <p> <input  type="submit" value="ADD product to store"  /></p>
+    <p><input type="submit" value="ADD product to store"/></p>
 </form>
 
 <form action="#" th:action="@{/editProductStore}" method="get">
-    <p> <input  type="submit" value="edit product in store"  /></p>
+    <p><input type="submit" value="edit product in store"/></p>
 </form>
 
 <form action="#" th:action="@{/deleteProductStore}" method="get">
-    <p> <input  type="submit" value="delete product from store"  /></p>
+    <p><input type="submit" value="delete product from store"/></p>
 </form>
 
 <form action="#" th:action="@{/searchproduct}" method="get">
-    <p><input type="submit" value="search for product"/> </p>
+    <p><input type="submit" value="search for product"/></p>
 </form>
 
 <form action="#" th:action="@{/viewstatistics}" method="get">
-    <p><input  type="submit" value="view statistics"  /></p>
+    <p><input type="submit" value="view statistics"/></p>
 </form>
 
 <form action="#" th:action="@{/showbalance}" method="get">
-    <p><input  type="submit" value="view Balance"  /></p>
+    <p><input type="submit" value="view Balance"/></p>
 </form>
 
 <form action="#" th:action="@{/viewActionsST}" method="get">
-    <p><input type="submit" value="View Actions"/> </p>
+    <p><input type="submit" value="View Actions"/></p>
 </form>
 
 <form action="#" th:action="@{/Add_Col}" method="get">
-    <input  type="submit" value="Add Collaborators"  /></p>
+    <input type="submit" value="Add Collaborators"/></p>
 </form>
 
 <form action="#" th:action="@{/logout}" method="get">
-    <input  type="submit" value="Logout :( "  /></p>
+    <input type="submit" value="Logout :( "/></p>
+
 </form>
+
 
 </body>
 </html>

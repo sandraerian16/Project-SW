@@ -49,13 +49,13 @@ public class Statistics_Service {
     public Iterable<Platform> brand_product(Model model, @ModelAttribute Statistics brand) {
 
         Iterable<Platform> arr = Plrip.findAll();
-          return arr;
+        return arr;
 
     }
 
     public Iterable<Product> Max() {
         Iterable<Product> arr = Prip.findAll();
-     return arr;
+        return arr;
 
     }
 
@@ -63,7 +63,6 @@ public class Statistics_Service {
         Iterable<Product> arr = Prip.findAll();
         return arr;
     }
-
 
 
 }

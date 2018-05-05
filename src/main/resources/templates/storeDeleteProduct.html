@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet"/>
     <title>StoreDeleteProduct</title>
 </head>
 
 <body>
-<form action="#" th:action="@{/deleteProductStore}" th:object="${prod2}"  method="post">
+<form action="#" th:action="@{/deleteProductStore}" th:object="${prod2}" method="post">
     <p>Product Name To Delete <br/> <input type="text" th:field="*{name}" placeholder="product name.."/></p>
+    <select th:field="*{store_ID}">
+        <option value=""></option>
+        <option th:each="t : ${st}" th:value="${t.getStore_name()}"><p th:text="${t.getStore_name()}"/></option>
+    </select>
 
-    <p><input type="submit" value="Delete Product From Store" />
+    <p><input type="submit" value="Delete Product From Store"/>
 </form>
 <form action="#" th:action="@{/Back}" method="get">
-    <input  type="submit" value="return to menu"  /></p>
+    <input type="submit" value="return to menu"/></p>
 </form>
 </body>
 </html>

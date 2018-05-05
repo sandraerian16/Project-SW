@@ -8,22 +8,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 @Service
-public  class  Brand_Service {
+public class Brand_Service {
     @Autowired
     private Brand_Repository B_R;
 
     public Brand_Service() {
     }
 
-    public String AddBrand(Model model,  @ModelAttribute Brand pro) {
+    public String AddBrand(Model model, @ModelAttribute Brand pro) {
+
 
         model.addAttribute("pro", new Brand());
-        if (B_R.existsById(pro.getName()))
-        {
+        if (B_R.existsById(pro.getName())) {
             return "Add_Brand";
         }
         B_R.save(pro);

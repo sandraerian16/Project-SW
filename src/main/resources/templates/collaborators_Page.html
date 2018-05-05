@@ -2,21 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Handling Form Submission</title>
-    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet"/>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 <body>
-
+<h1>Welcome,
+    <p1 th:text="${name}"></p1>
+</h1>
 <form action="#" th:action="@{/AddProducttostore}" method="get">
-    <input  type="submit" value="ADD product to store"  /></p>
+    <input type="submit" value="ADD product to store"/></p>
 </form>
 <form action="#" th:action="@{/viewstatistics}" method="get">
-    <input  type="submit" value="view statistics"  /></p>
+    <input type="submit" value="view statistics"/></p>
 </form>
 <form action="#" th:action="@{/logout}" method="get">
-    <input  type="submit" value="Logout :( "  /></p>
+    <input type="submit" value="Logout :( "/></p>
 </form>
 </body>
 </html>

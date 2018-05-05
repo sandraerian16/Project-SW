@@ -10,8 +10,10 @@
 <form action="#" th:action="@{/AddProducttostore}" th:object="${prod}"  method="post">
     <p>Product Name<br/><input type="text" th:field="*{name}" placeholder="product name that already exists in platform.."/></p>
     <p>Product Type<br/> <input type="text" th:field="*{product_type}" placeholder="product type.."/></p>
-    <p>Store Name<br/><input type="text" th:field="*{store_ID}" placeholder="your store name.."/></p>
-
+    <select th:field="*{store_ID}">
+        <option value=""></option>
+        <option th:each="t : ${st}" th:value="${t.getStore_name()}"><p th:text="${t.getStore_name()}"/></option>
+    </select>
     <p>Price<br/> <input type="number" th:field="*{price}" placeholder="price should be in the range.."/></p>
     <p>Quntity<br/><input type="number" th:field="*{quntity}" placeholder="the available quantity.."/></p>
     <p><input type="submit" value="ADD PRODUCT TO STORE" />

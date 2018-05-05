@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet"/>
 
     <title>Title</title>
 </head>
@@ -12,9 +12,9 @@
 <body>
 
 <table>
-    <th>Store name </th>
-    <th>type </th>
-    <th>Owner name </th>
+    <th>Store name</th>
+    <th>type</th>
+    <th>Owner name</th>
     <tr th:each="st : ${st}">
 
         <td th:text="${st.getStore_name()}"></td>
@@ -23,12 +23,12 @@
 
     </tr>
 </table>
-<form action="#" th:action="@{/approve}"   method="get">
+<form action="#" th:action="@{/approve}" method="get">
     <input type="submit" value="Approve"/>
 
 </form>
 <form action="#" th:action="@{/Back}" method="get">
-    <input  type="submit" value="return to menu"  /></p>
+    <input type="submit" value="return to menu"/></p>
 </form>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package com.example.demo.Controllers;
 
-
 import com.example.demo.Entity.Collaborators_Class;
 import com.example.demo.Entity.Store;
 import com.example.demo.Entity.User;
@@ -27,7 +26,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 @Controller
 public class StoreController {
     @Autowired
@@ -42,9 +40,10 @@ public class StoreController {
         model.addAttribute("store", new Store());
         return "AddStore";
     }
+
     @PostMapping("/Addstore1")
-    public String AddStore_Info(Model model, @ModelAttribute Store store) {
-        return  service.AddStore(model, store) ;
+    public String AddStore_Info(Model model, @ModelAttribute Store store, HttpServletRequest request) {
+        return service.AddStore(model, store, request);
     }
 
     @GetMapping("/Showstores")
@@ -63,6 +62,7 @@ public class StoreController {
         mv.setViewName("StoreList");
         return mv;
     }
+
     @GetMapping("/approve")
     public String Approve(Model model) {
         model.addAttribute("f", new Store());
@@ -76,31 +76,27 @@ public class StoreController {
     }
 
     @GetMapping("/Add_Colla")
-    public String Add_Colla(Model model)
-    {
-        model.addAttribute("Sub",new User());
+    public String Add_Colla(Model model) {
+        model.addAttribute("Sub", new User());
         return "Add_Collaborators";
     }
 
     @PostMapping("/Add_Colla")
-    public String Add_Colla_Info(Model model,@ModelAttribute User Sub , @ModelAttribute Store store, HttpServletRequest request)
-    {
-        return service.Add_Colla(model,Sub , request);
+    public String Add_Colla_Info(Model model, @ModelAttribute User Sub, @ModelAttribute Store store, HttpServletRequest request) {
+        return service.Add_Colla(model, Sub, request);
     }
 
 
-
     @GetMapping("/Add_Col")
-    public String Add_Col(Model model)
-    {
+    public String Add_Col(Model model) {
         model.addAttribute("f", new Store());
         return "Add_Col";
     }
 
     @PostMapping("/Add_Col")
-    public String Check_Add_Col(Model model,@ModelAttribute User Sub , @ModelAttribute Store store, HttpServletRequest request) {
+    public String Check_Add_Col(Model model, @ModelAttribute User Sub, @ModelAttribute Store store, HttpServletRequest request) {
 
-        return service.Check(model, Sub,store,request);
+        return service.Check(model, Sub, store, request);
     }
 
 }

@@ -4,14 +4,11 @@ import com.example.demo.Entity.Platform;
 import com.example.demo.Repository.PlatformRepritory;
 import com.example.demo.Service.Platform_Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class platformController {

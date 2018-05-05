@@ -2,21 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet"/>
 
     <title>Buy_Product</title>
 </head>
 <body>
-<form action="#" th:action="@{/Buy}" th:object="${struct}"   method="post">
-    <p>Product Name <input type="text" th:field="*{name}" placeholder="product name.."/> </p>
+<form action="#" th:action="@{/Buy}" th:object="${struct}" method="post">
+    <p>Product Name <input type="text" th:field="*{name}" placeholder="product name.."/></p>
     <p>Quantity <input type="text" th:field="*{num}" placeholder="quantity to buy.."/></p>
-    <p>Shipping Address <input type="text" th:field="*{address}"placeholder="enter your correct address.."/></p>
+    <p>Shipping Address <input type="text" th:field="*{address}" placeholder="enter your correct address.."/></p>
     <p><input type="checkbox" name="agreement" value="agree" th:field="*{agree}"> agree on the agreement <br></p>
     <input type="submit" value="BUY"/>
 
 </form>
 <form action="#" th:action="@{/Back}" method="get">
-    <input  type="submit" value="return to menu"  /></p>
+    <input type="submit" value="return to menu"/></p>
 </form>
 </body>
 </html>

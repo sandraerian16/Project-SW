@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/CSS_sheet/css.css}" rel="stylesheet"/>
 
     <title>Platform Product</title>
 </head>
 <body>
-<form action="#" th:action="@{/AddProduct}" th:object="${pro}"  method="post">
+<form action="#" th:action="@{/AddProduct}" th:object="${pro}" method="post">
     <p>Name <br/><input type="text" th:field="*{product_name}" placeholder="product name.."/></p>
     <p>Price From <br/><input type="number" th:field="*{price_start}" placeholder="price starts from.."/></p>
     <p>Price To <br/><input type="number" th:field="*{price_end}" placeholder="maximum price for this product.."/></p>
     <p>Brand <br/><input type="text" th:field="*{product_brand}" placeholder="brand name.."/></p>
     <p>Category <br/><input type="text" th:field="*{product_category}" placeholder="category name.."/></p>
 
-    <p><input type="submit" value="ADD PRODUCT TO PLATFORM" />
+    <p><input type="submit" value="ADD PRODUCT TO PLATFORM"/>
 </form>
 <form action="#" th:action="@{/Back}" method="get">
-    <input  type="submit" value="return to menu"  /></p>
+    <input type="submit" value="return to menu"/></p>
 </form>
 </body>
 </html>
