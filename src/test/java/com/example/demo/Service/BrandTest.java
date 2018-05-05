@@ -40,18 +40,19 @@ public class BrandTest {
         MockitoAnnotations.initMocks(this);
     }
     @Test
-    public void wrongAdd() {
-
+    public void exsting_brand() {
 
         Brand brand= new Brand("tv","toshiba ","sdfgh");
-        assertEquals( brand_service.AddBrand(model,brand,request),"Add_Brand");
+        Mockito.when(brand_repository.existsById(brand.getName())).thenReturn(true);
+        assertEquals( brand_service.AddBrand(model,brand),"Add_Brand");
     }
     @Test
-    public void rightAdd() {
+    public void new_Add() {
 
 
         Brand brand= new Brand("tv","toshiba ","sdfgh");
-        assertEquals( brand_service.AddBrand(model,brand,request),"admin_face");
+        Mockito.when(brand_repository.existsById(brand.getName())).thenReturn(false);
+        assertEquals( brand_service.AddBrand(model,brand),"admin_face");
     }
     @Test
     public void foundinDB() {
