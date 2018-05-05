@@ -55,8 +55,9 @@ public class BrandTest {
         assertEquals( brand_service.AddBrand(model,brand),"admin_face");
     }
     @Test
-    public void foundinDB() {
-        Brand brand= new Brand("tv","toshiba ","sdfgh");
-        assertEquals(brand_repository.existsById(brand.getName()),true);
+    public void empty_input() {
+        Brand brand= new Brand("","","");
+
+        assertEquals( brand_service.AddBrand(model,brand),"Add_Brand");
     }
 }
