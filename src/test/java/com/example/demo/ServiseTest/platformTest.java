@@ -37,23 +37,23 @@ public class platformTest {
     @Test
     public void wrongAdd() {
 
-        Platform platform= new Platform("product_name","product_brand", 3,  "product_category",5);
+        Platform platform= new Platform("","product_brand", 3,  "product_category",5);
         //System.out.println( platform_service.AddProduct( model, platform));
-        assertEquals( platform_service.AddProduct( model, platform,request),"addproduct");
+        assertEquals( platform_service.AddProduct( model, platform),"addproduct");
     }
     @Test
     public void rightAdd() {
 
 
         Platform platform= new Platform("product_name","product_brand", 3,  "product_category",5);
-        assertEquals( platform_service.AddProduct(model,platform,request),"admin_face");
+        assertEquals( platform_service.AddProduct(model,platform),"admin_face");
     }
     @Test
     public void foundinDB() {
 
 
         Platform platform= new Platform("product_name","product_brand", 3,  "product_category",5);
-        assertEquals(platformRepritory.existsById(platform.getProduct_name()),true);
+        assertEquals(platformRepritory.existsById(platform.getProduct_name()),false);
     }
 }
 /*

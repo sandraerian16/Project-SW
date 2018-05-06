@@ -44,7 +44,7 @@ public class UserController {
     @PostMapping("/login")
     public ModelAndView Login_Info(Model model, @ModelAttribute User sub, HttpServletRequest request, HttpServletResponse response) {
 
-        return service.Login(model, sub, request, response);
+        return service.Login(model, sub, request);
     }
 
     @GetMapping("/showbalance")
@@ -75,57 +75,6 @@ public class UserController {
         HttpSession session = request.getSession();
         String type = (String) session.getAttribute("type");
         ModelAndView mv2 = new ModelAndView();
-        mv2.setViewName("login");
-        if (type.equals("Administrator")) {
-            Optional<User> userr = use.findById((String) session.getAttribute("username"));
-            User user1 = new User();
-            ModelAndView mv = new ModelAndView();
-
-            if (userr.isPresent()) {
-                user1 = userr.get();
-                mv.addObject("name", user1.getUser_name());
-
-            }
-            mv.setViewName("admin_face");
-            return mv;
-        } else if (type.equals("StoreOwner")) {
-            Optional<User> userr = use.findById((String) session.getAttribute("username"));
-            User user1 = new User();
-            ModelAndView mv = new ModelAndView();
-
-            if (userr.isPresent()) {
-                user1 = userr.get();
-                mv.addObject("name", user1.getUser_name());
-            }
-            mv.setViewName("storeOwner_page");
-            return mv;
-
-        } else if (type.equals("NormalUser")) {
-            Optional<User> userr = use.findById((String) session.getAttribute("username"));
-            User user1 = new User();
-            ModelAndView mv = new ModelAndView();
-
-            if (userr.isPresent()) {
-                user1 = userr.get();
-                mv.addObject("name", user1.getUser_name());
-
-            }
-            mv.setViewName("NormalUserPage");
-            return mv;
-        } else if (type.equals("Collaborators")) {
-            Optional<User> userr = use.findById((String) session.getAttribute("username"));
-            User user1 = new User();
-            ModelAndView mv = new ModelAndView();
-
-            if (userr.isPresent()) {
-                user1 = userr.get();
-                mv.addObject("name", user1.getUser_name());
-
-            }
-            mv.setViewName("collaborators_Page");
-            return mv;
-        }
-        return mv2;
-
+       return service.go_to((String) session.getAttribute("username"),type);
     }
 }

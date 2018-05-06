@@ -13,14 +13,14 @@ public class TC01_AddStore_Valid
  @Test
  public void AddStore()
  {
-     System.setProperty("webdriver.chrome.driver","F:\\FCI_Three\\New folder\\Chrome\\chromedriver.exe");
+     System.setProperty("webdriver.chrome.driver","//home//andrew//Desktop//chromedriver_linux64//chromedriver");
      WebDriver driver= new ChromeDriver();
      driver.get("http://localhost:8080/login");
      driver.manage().window().maximize();
      driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 
-     driver.findElement(By.xpath("//input[@id='user_name']")).sendKeys("Alaa");
-     driver.findElement(By.xpath("//input[@id='password']")).sendKeys("125");
+     driver.findElement(By.xpath("//input[@id='user_name']")).sendKeys("sandra");
+     driver.findElement(By.xpath("//input[@id='password']")).sendKeys("sandra");
      driver.findElement(By.xpath("//input[@type='submit']")).click();
 
      //assertEquals("StoreOwnerPage",driver.getTitle());
@@ -28,7 +28,7 @@ public class TC01_AddStore_Valid
 
 
 
-     driver.findElement(By.xpath("//input[@id='store_name']")).sendKeys("Selia");
+     driver.findElement(By.xpath("//input[@id='store_name']")).sendKeys("sandra3");
      driver.findElement(By.xpath("//input[@id='store_telephone']")).sendKeys("+9663465fdff6565184");
      driver.findElement(By.xpath("//input[@id='type']")).sendKeys("Beauty");
      driver.findElement(By.xpath("//input[@id='store_address']")).sendKeys("Jordon");

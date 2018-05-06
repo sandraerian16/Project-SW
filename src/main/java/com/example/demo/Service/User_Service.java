@@ -38,8 +38,34 @@ public class User_Service {
         return "login";
     }
 
+    public ModelAndView go_to(String username, String type) {
+        if (type.equals("Administrator")) {
+            ModelAndView mv = new ModelAndView();
+            mv.addObject("name", username);
 
-    public ModelAndView Login(Model model, @ModelAttribute User sub, HttpServletRequest request, HttpServletResponse response) {
+            mv.setViewName("admin_face");
+            return mv;
+        } else if (type.equals("StoreOwner")) {
+            ModelAndView mv = new ModelAndView();
+            mv.addObject("name", username);
+            mv.setViewName("storeOwner_page");
+            return mv;
+
+        } else if (type.equals("NormalUser")) {
+            ModelAndView mv = new ModelAndView();
+            mv.addObject("name", username);
+            mv.setViewName("NormalUserPage");
+            return mv;
+        } else {
+            ModelAndView mv = new ModelAndView();
+            mv.addObject("name", username);
+            mv.setViewName("collaborators_Page");
+            return mv;
+        }
+
+    }
+
+    public ModelAndView Login(Model model, @ModelAttribute User sub, HttpServletRequest request) {
         model.addAttribute("sub", new User());
         ModelAndView mv3 = new ModelAndView();
         mv3.setViewName("login");
@@ -51,68 +77,24 @@ public class User_Service {
                 User user = optionalUser.get();
                 if (user.getPassword().equals(sub.getPassword())) {
 
-                    response.setContentType("text/html");
-                    HttpSession session = request.getSession();
-                    session.invalidate();
-                    session = request.getSession();
 
-                    session.setAttribute("username", user.getUser_name());
-                    session.setAttribute("Address", user.getAddress());
-                    session.setAttribute("type", user.getType());
-                    System.out.println(session.getId());
-                    ModelAndView mv2 = new ModelAndView();
-                    mv2.setViewName("login");
+                    HttpSession session;
+                    try {
+                        session = request.getSession();
+                        session.invalidate();
+                        session = request.getSession();
 
-
-                    if (user.getType().equals("Administrator")) {
-                        Optional<User> userr = use.findById((String) session.getAttribute("username"));
-                        User user1 = new User();
-                        ModelAndView mv = new ModelAndView();
-
-                        if (userr.isPresent()) {
-                            user1 = userr.get();
-                            mv.addObject("name", user1.getUser_name());
-
-                        }
-                        mv.setViewName("admin_face");
-                        return mv;
-                    } else if (user.getType().equals("StoreOwner")) {
-                        Optional<User> userr = use.findById((String) session.getAttribute("username"));
-                        User user1 = new User();
-                        ModelAndView mv = new ModelAndView();
-
-                        if (userr.isPresent()) {
-                            user1 = userr.get();
-                            mv.addObject("name", user1.getUser_name());
-                        }
-                        mv.setViewName("storeOwner_page");
-                        return mv;
-
-                    } else if (user.getType().equals("NormalUser")) {
-                        Optional<User> userr = use.findById((String) session.getAttribute("username"));
-                        User user1 = new User();
-                        ModelAndView mv = new ModelAndView();
-
-                        if (userr.isPresent()) {
-                            user1 = userr.get();
-                            mv.addObject("name", user1.getUser_name());
-
-                        }
-                        mv.setViewName("NormalUserPage");
-                        return mv;
-                    } else if (user.getType().equals("Collaborators")) {
-                        Optional<User> userr = use.findById((String) session.getAttribute("username"));
-                        User user1 = new User();
-                        ModelAndView mv = new ModelAndView();
-
-                        if (userr.isPresent()) {
-                            user1 = userr.get();
-                            mv.addObject("name", user1.getUser_name());
-
-                        }
-                        mv.setViewName("collaborators_Page");
-                        return mv;
+                        session.setAttribute("username", user.getUser_name());
+                        session.setAttribute("Address", user.getAddress());
+                        session.setAttribute("type", user.getType());
+                        System.out.println(session.getId());
+                    } catch (Exception e) {
+                        System.out.println(e);
                     }
+
+
+                    return go_to(user.getUser_name(), user.getType());
+
                 }
             } else {
                 return mv3;
@@ -121,9 +103,17 @@ public class User_Service {
         return mv3;
     }
 
-    public void logout(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.invalidate();
+    public String logout(HttpServletRequest request) {
+        HttpSession session;
+        try {
+            session = request.getSession();
+            session.invalidate();
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+        return "logged out";
+
     }
 
 

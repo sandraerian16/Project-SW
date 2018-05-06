@@ -41,7 +41,7 @@ public class StoreTest {
 @Test
 public void wrongAdd() {
 
-    Store platform= new Store("store_name","store_address","store_telephone", "type", "location ", "Owner");
+    Store platform= new Store("","store_address","store_telephone", "type", "location ", "Owner");
 
     assertEquals( store_service.AddStore( model, platform,request),"AddStore");
 }

@@ -32,7 +32,7 @@ public class BrandTest {
     public void wrongAdd() {
 
         
-        Brand brand= new Brand("tv","toshiba ","sdfgh");
+        Brand brand= new Brand("brand1","toshiba ","sdfgh");
         assertEquals( brand_service.AddBrand(model,brand),"Add_Brand");
     }
     @Test

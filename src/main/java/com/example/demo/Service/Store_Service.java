@@ -139,7 +139,7 @@ public class Store_Service {
             store_RB.save(t);
         }
         User_RB.save(Sub);
-        return "Add_Collaborators";
+        return "storeOwner_page";
     }
 
     public String Login(Model model, @ModelAttribute User sub, HttpServletRequest request, HttpServletResponse response) {

@@ -8,16 +8,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
-import org.springframework.web.servlet.ModelAndView;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
-
-import javax.swing.*;
 import java.util.ArrayList;
-
 import static org.testng.Assert.*;
-import static reactor.core.publisher.Mono.when;
 
 public class Actions_ServiceTest {
 
@@ -40,8 +34,6 @@ public class Actions_ServiceTest {
         ArrayList<Actions>s = new ArrayList<>();
         s.add(actions1); s.add(actions2);
         Mockito.when(repository.findAll()).thenReturn(s);
-        assertEquals( service.storeActions(model,store),s);
-
+        assertEquals( service.storeActions(model,store),"viewActions");
     }
-
 }

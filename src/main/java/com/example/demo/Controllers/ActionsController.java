@@ -51,7 +51,7 @@ public class ActionsController {
     }
 
     @PostMapping("/viewActionsST")
-    public ModelAndView SearchProduct(Model model, @ModelAttribute Store storeName) {
+    public String SearchProduct(Model model, @ModelAttribute Store storeName) {
         return service.storeActions(model, storeName);
 
     }

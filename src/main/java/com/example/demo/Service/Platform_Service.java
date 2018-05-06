@@ -18,7 +18,7 @@ public class Platform_Service {
 
     public String AddProduct(Model model, @ModelAttribute Platform pro) {
         model.addAttribute("pro", new Platform());
-        if (platform.existsById(pro.getProduct_name())) {
+        if (platform.existsById(pro.getProduct_name())|| pro.getProduct_name().equals("")) {
             return "addproduct";
         }
         platform.save(pro);

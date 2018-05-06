@@ -31,14 +31,21 @@ public class Product_Service {
 
     public String AddProduct_ToStore(Model model, @ModelAttribute Product prod, HttpServletRequest request) {
         model.addAttribute("prod", new Product());
-        HttpSession session = request.getSession();
-        model.addAttribute("name", (String) session.getAttribute("username"));
+        HttpSession session;
+        String username = "";
+        try {
+            session = request.getSession();
+            username = (String) session.getAttribute("username");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        model.addAttribute("name", username);
         ArrayList<Store> st = new ArrayList<>();
         Iterable<Store> s = store.findAll();
 
-        System.out.println("fdgdfs : " + (String) session.getAttribute("username"));
+        System.out.println("fdgdfs : " + username);
         for (Store t : s) {
-            if (t.getOwner().equals((String) session.getAttribute("username"))) {
+            if (t.getOwner().equals(username)) {
                 st.add(t);
             }
             // st.add(t);
@@ -73,15 +80,22 @@ public class Product_Service {
 
     public String EditProduct_ToStore(Model model, @ModelAttribute Product prod1, HttpServletRequest request) {
         model.addAttribute("prod1", new Product());
-        HttpSession session = request.getSession();
-        model.addAttribute("name", (String) session.getAttribute("username"));
+        HttpSession session;
+        String username = "";
+        try {
+            session = request.getSession();
+            username = (String) session.getAttribute("username");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        model.addAttribute("name", username);
 
         ArrayList<Store> st = new ArrayList<>();
         Iterable<Store> s = store.findAll();
 
-        System.out.println("fdgdfs : " + (String) session.getAttribute("username"));
+        System.out.println("fdgdfs : " + username);
         for (Store t : s) {
-            if (t.getOwner().equals((String) session.getAttribute("username"))) {
+            if (t.getOwner().equals(username)) {
                 st.add(t);
             }
             // st.add(t);
@@ -124,14 +138,21 @@ public class Product_Service {
     public String DeleteProduct_ToStore(Model model, @ModelAttribute Product prod2, HttpServletRequest request) {
         model.addAttribute("prod2", new Product());
 
-        HttpSession session = request.getSession();
-        model.addAttribute("name", (String) session.getAttribute("username"));
+        HttpSession session;
+        String username = "";
+        try {
+            session = request.getSession();
+            username = (String) session.getAttribute("username");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        model.addAttribute("name", username);
         ArrayList<Store> st = new ArrayList<>();
         Iterable<Store> s = store.findAll();
 
-        System.out.println("fdgdfs : " + (String) session.getAttribute("username"));
+        System.out.println("fdgdfs : " + username);
         for (Store t : s) {
-            if (t.getOwner().equals((String) session.getAttribute("username"))) {
+            if (t.getOwner().equals(username)) {
                 st.add(t);
             }
             // st.add(t);
@@ -163,11 +184,19 @@ public class Product_Service {
 
 
     public String Buy_Product(Model model, @ModelAttribute temp temp, HttpServletRequest request) {
-
+        model.addAttribute("struct", new temp());
         model.addAttribute(temp);
-        HttpSession session = request.getSession();
+        HttpSession session;
+        String username = "", type = "";
+        try {
+            session = request.getSession();
+            username = (String) session.getAttribute("username");
+            type = (String) session.getAttribute("type");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         Optional<Product> product = Product_RB.findById(temp.getName());
-        Optional<User> user = use.findById((String) session.getAttribute("username"));
+        Optional<User> user = use.findById(username);
         User user1;
         if (user.isPresent() && product.isPresent()) {
             System.out.println("true");
@@ -198,23 +227,24 @@ public class Product_Service {
                 s.setQuntity(s.getQuntity() - temp.num);
                 Product_RB.delete(s);
                 Product_RB.save(s);
+
+                if (type.equals("StoreOwner")) {
+                    return "storeOwner_page";
+                }
+                return "NormalUserPage";
+
             }
         }
-        String t = (String) session.getAttribute("type");
-        if (t.equals("StoreOwner")) {
-            return "storeOwner_page";
-        }
-        return "NormalUserPage";
-
+        return "buy";
     }
 
     public ArrayList<Product> viewStatistic(HttpServletRequest request) {
         HttpSession session;
-        String name="";
+        String name = "";
         try {
             session = request.getSession();
             name = (String) session.getAttribute("username");
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         User Store_owner = new User();
@@ -248,13 +278,20 @@ public class Product_Service {
 
     public String UndoAction2(Model model, @ModelAttribute Actions Action, HttpServletRequest request) {
         model.addAttribute("Action", new Actions());
-        HttpSession session = request.getSession();
+        HttpSession session;
+        String username = "";
+        try {
+            session = request.getSession();
+            username=(String) session.getAttribute("username");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         Optional<Actions> actionOP = Actions_RB.findById(Action.getID());
         if (actionOP.isPresent()) {
 
             Optional<Store> store1 = store.findById(actionOP.get().getStoreID());
-            if (actionOP.isPresent() && store1.get().getOwner().equals((String) session.getAttribute("username"))) {
+            if (store1.isPresent() && store1.get().getOwner().equals(username)) {
                 Actions action = actionOP.get();
                 if (action.getType().equals("ADD")) {
                     String productname = action.getProductName();
